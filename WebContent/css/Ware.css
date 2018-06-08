@@ -1,0 +1,135 @@
+.body{
+	height: 4000px;
+	width: auto;
+}
+.p{
+	display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.main_body{
+	width: 1200px;
+	margin: 0px auto;
+}
+/*
+ * 车辆信息图片部分
+ */
+.car-infobox{
+	width: 1250px;
+	height: 550px;
+	display: inline;
+}
+.car-info-imgbox{
+	width: 600px;
+	height: 550px;
+	float: left;
+}
+.car-info-imgbox-main{
+	width: 600px;
+	height: 400px;
+	margin-bottom: 10px;
+}
+.car-info-imgbox-main img{
+	width: 600px;
+	height: 400px;
+	position: relative;
+	margin-bottom: 15px;
+}
+.car-info-imgbox-small{
+	width: 600px;
+	height: 70px;
+	position: relative;
+	overflow: hidden;
+	display: inline;
+}
+.car-info-imgbox-small ul{
+	list-style: none;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 600px;
+}
+.car-info-imgbox-small li{
+	margin-right: 5px;
+	margin-top: 0px;
+	display: inline;
+}
+.car-info-imgbox-small img{
+	margin-right: 5px;
+	margin-top: 0px;
+	height: 65px;
+	width: 105px;
+}
+.changeBorder{
+	border: 2px solid #FF4500;
+}
+/**
+ * 车辆价格部分
+ */
+.car-info-pricebox{
+	width: 540px;
+	height: 550px;
+	float: right;
+	padding-left: 60px;
+	overflow: hidden;
+}
+.car-info-title{
+	font-size: 35px;
+	width: 540px;
+	height: 40px;
+	margin: 10px 0px 0px 0px;
+}
+.car-info-price{
+	width: 540px;
+	height: 40px;
+	margin: 50px 0px 0px 0px;
+}
+.car-info-price p{
+	margin-left: 10px;
+	font-size: 37px;
+	color: firebrick;
+	display: inline;
+}
+.car-info-carstmt{
+	margin: 50px 0px 0px 0px;
+	width: 540px;
+	height: 40px;
+}
+.car-info-carstmt ul{
+	list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.car-info-carstmt li{
+	display: inline;
+	border-right: 2px solid #A9A9A9;
+	padding-right: 5px;
+	font-size: 24px;
+}
+.car-info-buttonbox{
+	width: 500px;
+	height: 40px; 
+	float: right;  
+	margin: 200px 0 0 0;
+}
+.car-info-buttonbox input{
+	width:120px;
+	height: 60px;
+	display: inline;
+	margin-right: 40px;
+}
+/**
+ * 质量保证
+ */
+.car-info-quality{
+	margin: 10px 0 0 0;
+	height: 600px;
+}
+.car-info-quality img{
+	width: 1200px;
+	height: 545px;
+	padding: 5px;
+	border: 2px solid #A9A9A9;
+}

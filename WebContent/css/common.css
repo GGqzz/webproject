@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    background: #f2f2f2;
+}
+
+.public-header {
+    height: 50px;
+    background: #000;
+}
+
+.public-header a{
+    color: #CFCFCF;
+    font-size: 22px;
+    padding-top: 12px;
+    padding-left: 8px;
+    float: left;
+}
+
+
+.public-header a:hover{
+    color: #aaef9b;
+
+}
+
+.public-header img {
+    height: 36px;
+    float: left;
+    padding-left: 10px;
+    padding-top: 6px;
+}
+
+.public-header .header-search {
+
+}
+
+.public-header .function1 {
+    font-size: 14px;
+    padding-top: 16px;
+    padding-left: 24px;
+    color: #aaef9b;
+}
+
+.public-header .function {
+    font-size: 14px;
+    padding-top: 16px;
+    padding-left: 20px;
+}
+
+.public-header .function2 {
+    font-size: 14px;
+    padding-top: 16px;
+    margin-left: -4px;
+}
+
+.public-footer {
+    height: 80px;
+    padding-top: 30px;
+    text-align: center;
+    color: #696969;
+    background: #fff;
+}
+
+.public-container {
+    position: relative;
+    margin: 0 auto;
+    width: 960px;
+    height: 2480px;
+    /*border-bottom: 2px solid #000;*/
+}
+
+
+.public-container .paging {
+    font-size: 20px;
+    color: 	#696969;
+    position: relative;
+    margin-top: 40px;
+    padding-left: 380px;
+
+}

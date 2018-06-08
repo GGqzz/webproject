@@ -1,0 +1,198 @@
+.body{
+	width: auto;
+	height: 4000px;
+}
+.p{
+	display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.main_body{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+/**
+ * 条件筛选部分
+ */
+.screen{
+	width: 1200px;
+	height: 205px;
+}
+.condition{
+	width: 1200px;
+	height: 50px;
+}
+.condition dt{
+	float:left;
+	width: 70px;
+	height: 100%;
+	position: absolute;
+	line-height: 50px;
+	font-size: 14px;
+	text-align: center;
+	background:gainsboro;
+}
+.condition dl{
+	border: 1px solid #e6e6e6;
+    min-height: 50px;
+    position: relative;
+	display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 0;
+}
+.condition dd{
+	float: right;
+    width: 1128px;
+	display: block;
+    -webkit-margin-start: 40px;
+}
+.dd-top{
+	padding-top: 15px;
+	padding-left: 5px;
+	padding-bottom: 15px;
+	height: 20px;
+	display: block;
+}
+.condition span{
+	float: left;
+	height: 20px;
+	overflow: hidden;
+	width: 940px;
+}
+.dd-top label{
+	margin-left: 8px;
+	margin-right: 8px;
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 30px;
+	float: left;
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.dd-top input{
+	vertical-align: -2px;
+	_vertical-align: -1px;
+	margin-right: 2px;
+}
+ 
+/**
+ * 搜索结果部分
+ */
+.screenResult{
+	padding:10px;
+	height: 40px;
+	width: 1200px;
+	overflow: hidden;
+}
+.screenResult p{
+	float: left;
+	padding-left: 2px;
+	padding-right: 2px;
+	height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #DCDCDC;
+    margin: 0;
+}
+
+/**
+ * 排序部分
+ */
+.sortcontainer{
+	width: 1200px;
+	height: 50px;
+	float: left;
+	margin-top: 0px;
+	border-bottom: 1px solid #DCDCDC;
+	overflow: hidden;
+}
+.sort{
+	margin-top: 0px;
+	float: left;
+	height: 30px;
+}
+.sort a{
+	display: inline;
+	text-decoration: none;
+	color: black;
+	margin-right: 15px;
+}
+.sort input{
+	width: 86px;
+	margin-right: 22px;
+}
+/*
+ * 浏览电动车部分
+ */
+.carlistbox{
+	margin-top:3%;
+}
+.carList{
+	width: 1200px;
+	list-style: none;
+	height: 3000px;
+	padding-left: 5px;
+	padding-top: 20px;
+}
+.carList li{
+	float: left;
+	margin-bottom: 10px;
+	display: list-item;
+	text-align: -webkit-match-parent;
+	display: list-item;
+	width: 300px;
+	height: 300px;
+}
+.carList li a{
+	border: 1px solid transparent;
+	padding: 9px;
+	display: block;
+	height: 280px;
+	width: 280px;
+	position: relative;
+	padding-left: 10px;
+	text-decoration: none;
+}
+.carList img{
+	width: 280px;
+	height: 180px;
+	border: 1px solid #DCDCDC;
+}
+.carList h3{
+	margin: 0px;
+	font-size: 20px;
+	color: black;
+	font-weight: 400;
+	padding: 2px 0px 5px 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.carIfo{
+	width: 285px;
+	height: 25px;
+	padding: 1px 0px 0px 8px;
+}
+.carIfo p{
+	margin: 0px;
+	font-size: 16px;
+	color:darkgrey;
+}
+.carPrice{
+	width: 285px;
+	height: 25px;
+	padding: 1px 0px 5px 5px;
+	
+}
+.carPrice p{
+	margin-top: 0px;
+	color: orangered;
+	font-size: 25px;
+}
