@@ -81,36 +81,35 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
                         </p>
 					</div>
 					<div class="sell-form right dInline">
-						<form enctype="multipart/form-data" action="" method="post" name="forms" id="forms" onsubmit="return InputCheck();">
+						<form  action="sellCar.jsp" method="post" name="forms" id="forms">
 							<h3>登记您的爱车信息</h3>
 							<div class="sell-info" style="margin-top:5px">
                                 <div class="select-item clearfix">
                                 	<select class="select car-select" name="brandCar" id="brandCar" style="width:100%">
-										<option value="">请选择品牌</option>
-										<option value="0" > A 爱玛</option>
-										<option value="1" > E E客</option>
-										<option value="2" > T 台铃</option>
-										<option value="3" > X 新日</option>
-										<option value="4" > X 小刀</option>
-										<option value="5" > X 小牛</option>
-										<option value="6" > Y 雅迪</option>
-										<option value="7" > 其他</option>
+										<option value=""> 选择品牌</option>
+					                    <option value="爱玛" >爱玛</option>
+										<option value="E客" >E客</option>
+										<option value="台铃" >台铃</option>
+					                    <option value="新日" >新日</option>
+					                    <option value="小刀" >小刀</option>
+					                    <option value="小牛" >小牛</option>
+										<option value="雅迪" >雅迪</option> 
+										<option value="其他" >其他</option>
 									</select>                                    
 								</div>
 								<div class="select-item clearfix">
                                     <select class="select car-select" name="styleCar" id="styleCar" style="width:100%">
-                                        <option value="">请选择车型</option>
-										<option value="0" >两轮</option>
-										<option value="1" >电动摩托车</option>
-										<option value="2" >跑车</option>
-										<option value="3" >踏板车</option>
-										<option value="4" >折叠式</option>
-										<option value="5" >其他</option>
+                                        <option value=""> 选择车系</option>
+										<option value="两轮" >两轮</option>
+										<option value="电动摩托车" >电动摩托车</option>
+										<option value="跑车" >跑车</option>
+										<option value="踏板车" >踏板车</option>
+										<option value="折叠式" >折叠式</option>
+										<option value="其他" >其他</option>
                                     </select>
 								</div>
                                 <div class="select-item clearfix">
-                                    
-                                    <input type="text" name="priceCar" >价格
+                                    <input type="text" name="price" placeholder="出售价格" value="" class="cPrice" id="price"  style="float:right" />
 								</div>
 								<!--<div class="select-item clearfix">
 									<input id="input-phone" type="text" name="phone" value="手机号" class="cPut" style="width:150px" />
@@ -125,58 +124,26 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
 								<div class="seBtn">
                                 	<input id="input-phone" type="hidden" name="mobile" value="" />
                                     <input id="input-verify" type="hidden" name="verify" value="" />
-                                    <a href="addCar.jsp" id="sendMESS">提交</a>
+                                    <a href="#" id="sendMESS" onclick="return checkForm()">提交</a>
 									<!--<a href="javascript:void(0)" onclick="$('#forms').submit()">登记</a>-->
 									<!--<a href="#">评估</a>-->
 								</div>
 							</div>
 						</form>
 <input type="hidden" id="ckmobile" value="1" />
-<script type="text/livescript">
-$("#sendMESS").live("click",function(){
-	var ckmobile=$("#ckmobile").val();
-	if(ckmobile){
-		$("#yzcode").attr("src",'/Admin/Login/buildVerify');
-		$('#popBoxYzm').fadeIn();
-	}else{
-		sendtosend();
-	}
-});
-function sendtosend(){
-	var mobile=$("#shoujihao").val();
-	var verify=$("#yanzhengma").val();
-	var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-	if(!re.exec(mobile)){
-		alert("手机号格式不正确");
-		$("#shoujihao").focus();
-		return false;
-	}else{
-		$("#input-phone").val(mobile);
-		$("#input-verify").val(verify);
-		$('#popBoxYzm').fadeOut();
-		$('#forms').submit();
-	}
-}
-</script>
 <link rel="stylesheet" type="text/css" href="css/jquery.fancybox-1.3.4.css">
 <script type="text/javascript" src="js/jquery.fancybox-1.3.4.js"></script>
 <script type="text/javascript">
-$(function(){
-	$(".gj_btn").live("click",function(){
-		var makeCar=$("#makeCar").val();
-		var modeCar=$("#modeCar").val();
+var checkForm=function(){
+		var makeCar=$("#brandCar").val();
 		var styleCar=$("#styleCar").val();
 		var buytimeval=$("#buytimeval").val();
 		var mialval=$("#mialval").val();
+		var price=$("#price").val();
 		var url='/Sales/getprice';
 		if(makeCar==''){
 			alert("请选择品牌");
 			$("#makeCar").focus();
-			return false;
-		}
-		if(modeCar==''){
-			alert("请选择车系");
-			$("#modeCar").focus();
 			return false;
 		}
 		if(styleCar==''){
@@ -194,28 +161,13 @@ $(function(){
 			$("#mialval").focus();
 			return false;
 		}
-		
-		$.ajax({
-			 type: "POST",
-			 url: url,
-			 data: {makeid:makeCar, modeid:modeCar,styleid:styleCar,buytime:buytimeval,mile:mialval},
-			 dataType: "json",
-			 success: function(data){
-				// alert(data);
-				$(".guBox").html(data.html);
-				
-				$(".gj_btn").fancybox({
-					'padding':'0',
-					'titlePosition':'inside',
-					'transitionIn':'elastic',
-					'transitionOut':'elastic'
-				});
-			}
-		 });
-		 return false;
-	});
-	
-})
+		if(price==''){
+			alert("请输入价格");
+			$("#price").focus();
+			return false;
+		}
+		document.getElementById('forms').submit();
+	}
 </script>
 					</div>
 				</div>

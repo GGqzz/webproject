@@ -56,6 +56,7 @@
 .open-icon { position: absolute;width: 7px;height: 4px; background: transparent url("../images/select-open.png") no-repeat scroll 0% 0%;top: 14px;right: 15px;}
 #select-time {width: 163px; float: left;margin-right: 10px;}
 .cPut{width: 180px;  float: left;padding: 6px 8px;height:18px;border: 1px solid #DDD; position: relative;font-family:'Microsoft Yahei'}
+.cPrice{width:372px;  float: left;padding: 6px 8px;height:18px;border: 1px solid #DDD; position: relative;font-family:'Microsoft Yahei'}
 .select-item .unit {position: absolute;top: 8px; right: 10px;}
 #input-phone{width:163px;}
 .select-item a.right{display:inline-block;padding-top:10px;}

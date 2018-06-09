@@ -1,32 +1,29 @@
 package model;
 
-import java.util.Vector;
-
 public class Car {
-	private String car_id;
-	private String order_id;
-	private float price;
+	private int car_id;
+	private String price;
 	private String brand;
 	private String style;
 	private String age;
 	private String mile;
-	private Vector<Image> imageList=new Vector<Image>();
-	public String getCar_id() {
+	private String buyTime;
+	public int getCar_id() {
 		return car_id;
 	}
-	public void setCar_id(String car_id) {
+	public void setCar_id(int car_id) {
 		this.car_id = car_id;
 	}
-	public String getOrder_id() {
-		return order_id;
+	public void setBuy_Time(String buyTime) {
+		this.buyTime = buyTime;
 	}
-	public void setOrder_id(String order_id) {
-		this.order_id = order_id;
+	public String geetBuy_Time() {
+		return buyTime;
 	}
-	public float getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getBrand() {
@@ -52,11 +49,5 @@ public class Car {
 	}
 	public void setMile(String mile) {
 		this.mile = mile;
-	}
-	public Vector<Image> getImageList() {
-		return imageList;
-	}
-	public void setImageList(Vector<Image> imageList) {
-		this.imageList = imageList;
 	}
 }

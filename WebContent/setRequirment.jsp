@@ -17,8 +17,8 @@
 	rdd.setMin_price(request.getParameter("minPrice"));
 	rdd.setMax_price(request.getParameter("maxPrice"));
 	rdd.setOther_require(request.getParameter("content"));
-	System.out.println(request.getParameter("maxPrice")+" "+rdd.getMax_price()+" "+rdd.getBrand()+" "+
-			rdd.getStyle()+" "+rdd.getAge()+" "+rdd.getOther_require()+" "+user.getUserId());
+	//System.out.println(request.getParameter("maxPrice")+" "+rdd.getMax_price()+" "+rdd.getBrand()+" "+
+		//	rdd.getStyle()+" "+rdd.getAge()+" "+rdd.getOther_require()+" "+user.getUserId());
 	
 	Requirement_DingDanDAO rdddao=new Requirement_DingDanDAO();
 	rdddao.addRequirement_DingDan(con, rdd, user.getUserId());

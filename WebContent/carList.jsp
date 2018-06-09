@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,6 +18,11 @@
         DD_belatedPNG.fix('*');
     </script>
 <![endif]-->
+
+<%
+	
+%>
+
 </head>
 <body>
 <div id="header">
@@ -51,7 +57,7 @@
         <div class="result-box left dInline" style="height:auto;"> <span class="left">您的选择：</span>
           <div class="s-form left clearfix" style="white-space:normal; width:auto"></div>
         </div>
-        <a href="srdz.html" class="dBtn right">在线私人订制</a> </div>
+        <a href="checkUserOnLineSrdz.jsp" class="dBtn right">在线私人订制</a> </div>
       <div class="condition">
         <ul>
           <li class=""> <span class="c-name left">品牌：</span>
@@ -67,21 +73,25 @@
                 <div class="clearfix ps-a">
                   <select class="left" name="makeid"  id="Smakeid" placeholder="所属品牌">
                     <option value=""> 选择品牌</option>
-                    <option value="9" > A 爱玛</option>
-					<option value="91" > E E客</option>
-					<option value="92" > T 台铃</option>
-                    <option value="93" > X 新日</option>
-                    <option value="94" > X 小刀</option>
-                    <option value="95" > X 小牛</option>
-					<option value="96" > Y 雅迪</option>
-					<option value="97" > 其他</option>
+	                    <option value="爱玛" >爱玛</option>
+						<option value="E客" >E客</option>
+						<option value="台铃" >台铃</option>
+	                    <option value="新日" >新日</option>
+	                    <option value="小刀" >小刀</option>
+	                    <option value="小牛" >小牛</option>
+						<option value="雅迪" >雅迪</option> 
+						<option value="其他" >其他</option>
                   </select>
                 </div>
               </div>
             </div>
           </li>
           <li class=""> <span class="c-name left">价格：</span>
-            <div class="spec-moudle left dInline"> <a href="#" >1000以内</a> <a href="#" >1-3千</a> <a href="#" >3-5千</a> <a href="#" >5千以上</a>
+            <div class="spec-moudle left dInline"> 
+	            <a href="#" >1000以内</a> 
+	            <a href="#" >1-3千</a> 
+	            <a href="#" >3-5千</a> 
+	            <a href="#" >5千以上</a>
               <div class="pro_smore">
                 <div class="clearfix ps-b">
                   <table>
@@ -98,16 +108,20 @@
             </div>
           </li>
           <li class="" style="height:28px;"> <span class="c-name left">车型：</span>
-            <div class="spec-moudle left dInline" style="height:auto;"> <a href="#"  >
-              两轮</a> <a href="#"  >
-              电动摩托车</a> <a href="#" >
-              跑车</a> <a href="#"  >
-              踏板车</a> <a href="#" >
-              折叠式</a> <a href="#" >
-              更多</a> </div>
+            <div class="spec-moudle left dInline" style="height:auto;"> 
+            <a href="#"  >两轮</a> <a href="#"  >
+             	 电动摩托车</a> <a href="#" >
+             	 跑车</a> <a href="#"  >
+             	 踏板车</a> <a href="#" >
+              	折叠式</a> <a href="#" >
+             	 更多</a> </div>
           </li>
           <li class=""> <span class="c-name left">车龄：</span>
-            <div class="spec-moudle left dInline"> <a href="#" id="0-1" >1年以内</a> <a href="#" id="0-2" >2年以内</a> <a href="#" id="0-3" >3年以内</a>  <a href="#" id="3-0" >3年以上</a>
+            <div class="spec-moudle left dInline"> 
+            <a href="#" id="0-1" >1年以内</a> 
+            <a href="#" id="0-2" >2年以内</a> 
+            <a href="#" id="0-3" >3年以内</a>  
+            <a href="#" id="3-0" >3年以上</a>
               <div class="pro_smore">
                 <div class="clearfix ps-b">
                   <table>
@@ -183,14 +197,6 @@
       </div>
     </div>
     <div class="right dInline aRight"> 
-      <!--<div class="pgBox">
-				<a class="userImg" href="#">
-					<img src="images/user.gif"/>
-				</a>
-				<h2>资深评估团队<br/>确保车源品质</h2>
-				<p>亿金为您车辆提供免费<br/>评估与检查</p>
-				<a href="#" class="pgBtn">马上评估</a>
-			</div>-->
       <div class="dBox">
         <link rel="stylesheet" type="text/css" href="css/alert.css">
         <style type="text/css">
@@ -199,35 +205,38 @@ input:-moz-placeholder, textarea:-moz-placeholder {color:#000;}
 input::-moz-placeholder, textarea::-moz-placeholder {color:#000;}
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
 </style>
-        <form class="dForm" name="dForm" id="dForm" method="post" enctype="multipart/form-data" onsubmit="return cleckform();">
+        <form class="dForm" name="dForm" id="dForm" method="post" action="checkUserOnLineSrdzSmall.jsp">
           <h2>私人订制</h2>
           <p>专业车辆顾问为您服务</p>
           <table>
             <tr>
-              <td><select class="Smakeid" name="makeid"  id="" placeholder="所属品牌">
-                  <option value=""> 选择品牌（必选）</option>
-                  <option value="9" > A 爱玛</option>
-					<option value="91" > E E客</option>
-					<option value="92" > T 台铃</option>
-                    <option value="93" > X 新日</option>
-                    <option value="94" > X 小刀</option>
-                    <option value="95" > X 小牛</option>
-					<option value="96" > Y 雅迪</option>
-					<option value="97" > 其他</option>
-                 
+              <td><select class="Smakeid" name="brand"  id="brand" placeholder="所属品牌">
+                  <option value=""> 选择品牌</option>
+                  <option value="爱玛" >爱玛</option>
+				  <option value="E客" >E客</option>
+			      <option value="台铃" >台铃</option>
+                  <option value="新日" >新日</option>
+                  <option value="小刀" >小刀</option>
+                  <option value="小牛" >小牛</option>
+			      <option value="雅迪" >雅迪</option> 
+			      <option value="其他" >其他</option>
                 </select></td>
             </tr>
             <tr>
               <td><div id="xlselect">
-                  <select name="modeid">
-                    <option>选择车系(必选)</option>
-					  <option value="9" > 小龟</option>
-						<option value="91" > 其他</option>
+                  <select name="style" id="style">
+                    <option value=""> 选择车系（必选）</option>
+					<option value="两轮" >两轮</option>
+					<option value="电动摩托车" >电动摩托车</option>
+					<option value="跑车" >跑车</option>
+					<option value="踏板车" >踏板车</option>
+					<option value="折叠式" >折叠式</option>
+					<option value="其他" >其他</option>
                   </select>
                 </div></td>
             </tr>
             <tr>
-              <td><select name="years">
+              <td><select name="age" id="age">
                   <option value="不限">选择使用年限</option>
                   <option value="1年以内">1年以内</option>
                   <option value="2年以内">2年以内</option>
@@ -237,8 +246,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
                 </select></td>
             </tr>
             <tr>
-              <td><input type="text" name="dprice" placeholder="最少预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
-                <input type="text" name="hprice" placeholder="最多预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+              <td><input type="text" id="minPrice" name="minPrice" placeholder="最少预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                <input type="text" id="maxPrice" name="maxPrice" placeholder="最多预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
                 万元 </td>
             </tr>
             <tr>
@@ -250,7 +259,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
             <tr>
               <td><input id="input-phone" type="hidden" name="mobile" value="" />
                 <input id="input-verify" type="hidden" name="verify" value="" />
-                <input type="button" value="提交需求" class="sBtn" style=" padding:0;" id="sendMESS" /></td>
+                <input type="button" value="提交需求" class="sBtn" style=" padding:0;" id="sendMESS" onclick="return checkInput()" /></td>
             </tr>
           </table>
         </form>
@@ -278,36 +287,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
             <a class="closed">×</a> </div>
         </div>
         <input type="hidden" id="ckmobile" value="1" />
-        <script type="text/livescript">
-$("#sendMESS").live("click",function(){
-	var ckmobile=$("#ckmobile").val();
-	if(ckmobile){
-		$("#yzcode").attr("src",'/Admin/Login/buildVerify');
-		$('#popBoxYzm').fadeIn();
-	}else{
-		sendtosend();
-	}
-});
-function sendtosend(){
-	if ($('#remembermobile').attr('checked')){
-		remember = 2;
-	}else{
-		remember='';
-	}
-	var mobile=$("#shoujihao").val();
-	var verify=$("#yanzhengma").val();
-	var re = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-	if(!re.exec(mobile)){
-		alert("手机号格式不正确");
-		$("#shoujihao").focus();
-		return false;
-	}else{
-		$("#input-phone").val(mobile);
-		$("#input-verify").val(verify);
-		$('#popBoxYzm').fadeOut();
-		$('#dForm').submit();
-	}
-}
+
+<script type="text/livescript">
 </script> 
       </div>
       <style type="text/css">
@@ -340,6 +321,42 @@ $(function(){
 
 	});
 })
+
+var checkInput=function(){
+	var makeCar=$("#brand").val();
+		var styleCar=$("#style").val();
+		var buytimeval=$("#age").val();
+		var mialval=$("#minPrice").val();
+		var price=$("#maxPrice").val();
+		if(makeCar==0){
+			alert("请选择品牌");
+			$("#brand").focus();
+			return false;
+		}
+		if(styleCar==0){
+			alert("请选择车型");
+			$("#style").focus();
+			return false;
+		}
+		if(buytimeval==0){
+			alert("请选择车龄");
+			$("#age").focus();
+			return false;
+		}
+		if(mialval==''){
+			alert("请输入最少预算");
+			$("#mialval").focus();
+			return false;
+		}
+		if(price==''){
+			alert("请输入最大预算");
+			$("#price").focus();
+			return false;
+		}
+		document.getElementById('dForm').submit();
+}
+
+
 </script>
 <div id="footer">
   <div class="foot-a1">
