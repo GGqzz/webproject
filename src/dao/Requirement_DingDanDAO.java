@@ -25,12 +25,13 @@ public class Requirement_DingDanDAO {
 		rs.last();
 		//System.out.println(rs.getInt("require_id"));
 		rdd.setRequire_id(rs.getInt("require_id"));
-		//System.out.println(rs.getInt("require_id"));
+		
 		
 		sql="insert into buyer_requirementconnect(user_id,require_id) value(?,?)";
 		preparedStatement=con.prepareStatement(sql);
 		preparedStatement.setString(1, user_id);
 		preparedStatement.setInt(2, rdd.getRequire_id());
+		preparedStatement.executeUpdate();
 		preparedStatement.close();
 		
 	}
