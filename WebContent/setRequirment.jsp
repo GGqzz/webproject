@@ -7,6 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 	response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 	User user=(User)session.getAttribute("user");
 	Connection con=DBUtil.getConnection();
 	Requirement_DingDan rdd=new Requirement_DingDan();
@@ -17,7 +18,7 @@
 	rdd.setMax_price(request.getParameter("maxPrice"));
 	rdd.setOther_require(request.getParameter("content"));
 	System.out.println(request.getParameter("maxPrice")+" "+rdd.getMax_price()+" "+rdd.getBrand()+" "+
-			rdd.getStyle()+" "+rdd.getAge()+" "+rdd.getOther_require());
+			rdd.getStyle()+" "+rdd.getAge()+" "+rdd.getOther_require()+" "+user.getUserId());
 	
 	Requirement_DingDanDAO rdddao=new Requirement_DingDanDAO();
 	rdddao.addRequirement_DingDan(con, rdd, user.getUserId());

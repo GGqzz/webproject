@@ -58,7 +58,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#656565;}
         </div>
         <input type="hidden" id="ckmobile" value="1" />
         <div class="diForm">
-          <form id="dForm" name="dForm" method="post" enctype="multipart/form-data" action="setRequirment.jsp">
+          <form id="dForm" name="dForm" method="post" action="setRequirment.jsp">
           <br/>
           <h3>提交信息，帮您量身定制！</h3>
             <table>
@@ -78,7 +78,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#656565;}
             <tr>
                 <td><div id="xlselect">
                     <select class="" name="style"  id="" placeholder="所属车型">
-                      <option value=""> 选择车系（必选）</option>
+                            <option value=""> 选择车系（必选）</option>
 							<option value="两轮" >两轮</option>
 							<option value="电动摩托车" >电动摩托车</option>
 							<option value="跑车" >跑车</option>
@@ -116,7 +116,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#656565;}
                 <td colspan="2" style="text-align:right;"><input id="input-phone" type="hidden" name="mobile" value="" />
                   <input id="input-verify" type="hidden" name="verify" value="" />
                   <a href="#" class="btn" id="sendMESS" onclick="document.getElementById('dForm').submit();return false">私人订制</a>
-                  <input type="submit" value="私人订制"  /></td>
+                  </td>
               </tr>
             </table>
           </form>
