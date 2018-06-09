@@ -6,11 +6,11 @@
 <%@ page import="dao.*" %>
 <%@page import="java.sql.*" %>
 <%
+	response.setContentType("text/html;charset=utf-8");
 	request.setCharacterEncoding("UTF-8");
 	String name=request.getParameter("name");
 	String password=request.getParameter("password");
 	User user=DBUtil.login(DBUtil.getConnection(), name, password);
-	response.setCharacterEncoding("UTF-8");
 	PrintWriter output=response.getWriter();
 	if(user==null){
 		output.print("<script>alert('用户名或者密码错误,请重新输入!');window.history.back(-1);</script>");

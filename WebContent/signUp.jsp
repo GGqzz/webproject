@@ -7,7 +7,8 @@
 <%@page import="java.sql.*" %>
 <% 
 	Connection con=DBUtil.getConnection();
-	response.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html;charset=utf-8");
+	request.setCharacterEncoding("UTF-8");
 	PrintWriter output=response.getWriter();
 	if(DBUtil.checkUser(con, request.getParameter("name"))==false){
 		output.print("<script>alert('用户名重复,请更换用户名');window.history.back(-1);</script>");
