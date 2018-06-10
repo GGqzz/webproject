@@ -21,7 +21,7 @@
 		output.print("<script>alert('还没到这个时候呢!');window.history.back(-1);</script>");
 	}
 	else{
-		car.setBuy_Time(new SimpleDateFormat("yyyy-MM").format(date));
+		car.setBuy_Time(request.getParameter("buytime"));
 		car.setBrand(request.getParameter("brandCar"));
 		car.setStyle(request.getParameter("styleCar"));
 		car.setPrice(request.getParameter("price"));

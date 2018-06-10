@@ -9,7 +9,7 @@ public class DBUtil {
 	private static String URL="jdbc:mysql://localhost:3306/secondhand_mall?useUnicode=true&characterEncoding=utf8";
 	private static String DBDRIVER="com.mysql.jdbc.Driver";
 	private static String USERNAME="root";
-	private static String PASSWORD="2211321";
+	private static String PASSWORD="8230753";
 	
 	/**
 	 * 获取数据库连接

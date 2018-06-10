@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@page import="java.util.Vector" %>
+<%@ page import="model.*" %>
+<%@ page import="dao.*" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -20,7 +22,17 @@
 <![endif]-->
 
 <%
-	
+	Vector<Car> carList=new Vector<Car>();
+	carList=(Vector<Car>)session.getAttribute("carList");
+	int cPage;
+	int pageCount=(int)session.getAttribute("pageCount")-1;
+	if(request.getParameter("currentPage")==null){
+		cPage=(int)session.getAttribute("currentPage");
+	}
+	else{
+		cPage=Integer.parseInt(request.getParameter("cPage"));
+		session.setAttribute("currentPage", cPage);
+	}
 %>
 
 </head>
@@ -30,7 +42,7 @@
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.html">首页</a>
-      <a href="carList.jsp">我要买车</a>
+      <a href="buyCar.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
@@ -71,8 +83,8 @@
            
               <div class="pro_smore">
                 <div class="clearfix ps-a">
-                  <select class="left" name="makeid"  id="Smakeid" placeholder="所属品牌">
-                    <option value=""> 选择品牌</option>
+                  <select class="left" name="brandSelect"  id="Smakeid" placeholder="所属品牌">
+                    	<option value=""> 不限</option>
 	                    <option value="爱玛" >爱玛</option>
 						<option value="E客" >E客</option>
 						<option value="台铃" >台铃</option>
@@ -96,9 +108,9 @@
                 <div class="clearfix ps-b">
                   <table>
                     <tr>
-                      <td><input type="text" class="sTxt" id="price_L" value="" /></td>
+                      <td><input name="price_L" type="text" class="sTxt" id="price_L" value="" /></td>
                       <td>-</td>
-                      <td><input type="text" class="sTxt" id="price_R" value="" /></td>
+                      <td><input name="price_R" type="text" class="sTxt" id="price_R" value="" /></td>
                       <td>元</td>
                       <td><input type="submit" value="确定" class="sBtn" id="tjprice" style="line-height:10px" /></td>
                     </tr>
@@ -114,7 +126,21 @@
              	 跑车</a> <a href="#"  >
              	 踏板车</a> <a href="#" >
               	折叠式</a> <a href="#" >
-             	 更多</a> </div>
+             	 更多</a> 
+             	  <div class="pro_smore">
+                <div class="clearfix ps-a">
+                  <select name="style" id="style">
+                    <option value="">不限</option>
+					<option value="两轮" >两轮</option>
+					<option value="电动摩托车" >电动摩托车</option>
+					<option value="跑车" >跑车</option>
+					<option value="踏板车" >踏板车</option>
+					<option value="折叠式" >折叠式</option>
+					<option value="其他" >其他</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </li>
           <li class=""> <span class="c-name left">车龄：</span>
             <div class="spec-moudle left dInline"> 
@@ -126,9 +152,9 @@
                 <div class="clearfix ps-b">
                   <table>
                     <tr>
-                      <td><input type="text" class="sTxt" id="cheling_L" value="" /></td>
+                      <td><input name="age_L" type="text" class="sTxt" id="cheling_L" value="" /></td>
                       <td>-</td>
-                      <td><input type="text" class="sTxt" id="cheling_R" value="" /></td>
+                      <td><input name="age_R" type="text" class="sTxt" id="cheling_R" value="" /></td>
                       <td>年</td>
                       <td><input type="submit" value="确定" class="sBtn" id="tjcheling" style="line-height:10px" /></td>
                     </tr>
@@ -147,52 +173,51 @@
         <div class="cs-tit">
           <div class="clearfix">
             <div class="ctLeft left dInline">
-              <div class="ct-a left dInline"> <a class="on" href="#" ><i>全部</i></a> <a href="2/sta/B/ord/A/url_form.html"><i>在途</i>(13)</a> <a href="2/sta/C/ord/A/url_form.html"><i>在售</i>(307)</a> <a href="2/sta/E/ord/A/url_form.html"><i>预订</i>(22)</a> <a href="2/sta/D/ord/A/url_form.html"><i>已售</i>(744)</a> </div>
-              <div class="cs_sub"> 排序： <a class="cs-a1" href="#">默认<img src="images/down.gif"/></a> <a href="2/sta/A/ord/B/url_form.html">点击量<img src="images/down.gif"/></a>  <a href="2/sta/A/ord/E/url_form.html">价格<img src="images/up.gif"/></a> <a href="2/sta/A/ord/F/url_form.html">车龄<img src="images/up.gif"/></a> </div>
+              <div class="ct-a left dInline"> <a class="on" href="#" ><i>全部</i></a></div>
+              <div class="cs_sub"> 排序： <a class="cs-a1" href="#">默认<img src="images/down.gif"/></a> <a href="2/sta/A/ord/E/url_form.html">价格<img src="images/up.gif"/></a> <a href="2/sta/A/ord/F/url_form.html">车龄<img src="images/up.gif"/></a> </div>
             </div>
-            <div class="right cpages"> 1/32 <a href="#">&lt;</a><a href="2/sta/A/ord/A/p/2.html">&gt;</a> </div>
+            <div class="right cpages"> <%=(int)session.getAttribute("currentPage")+1 %>/<%=(int)session.getAttribute("pageCount") %> <a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")-1 %>">&lt;</a><a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")+1 %>">&gt;</a> </div>
           </div>
           <div class="cs-tit1"></div>
         </div>
         <div class="cs-list">
           <ul>
+          <%if(carList.size()!=0){ %>
             <li class="clearfix" style="position: relative;"> <span class="carImg left dInline">
             <a href="maiche_show.html" target="_blank">
               <div class="car_bg"> </div>
               <img src="images/3.png"  width="300" /></a> </span>
               <div class="carTxt right dInline">
-                <h2><a href="maiche_show.html" target="_blank">E客 E1S标准版</a></h2>
-                <p> <span>购买时间：2016-08</span> <span>已行驶：4.5千公里</span>   </p>
+                <h2><a href="maiche_show.html" target="_blank"><%=carList.get(cPage*2).getBrand()+" "+carList.get(cPage*2).getStyle() %></a></h2>
+                <p> <span>购买时间：<%=carList.get((int)session.getAttribute("currentPage")*2).getBuy_Time() %></span> <span>已行驶：<%=carList.get((int)session.getAttribute("currentPage")*2).getMile() %>公里</span>   </p>
                 <div class="price clearfix" style="margin:8px 0;">
                   <div class="left dInline pNum" style="width:110px;"> <font>价格</font><br/>
-                    <span class="num nBlue">4000 </span><font> 元</font> </div>
-                  <span class="num1 left" style="height:43px; width:450px;padding-top:10px;"><em>新车价：7999元</em><br/>
-                  为您节省：3999元
+                    <span class="num nBlue"><%=carList.get((int)session.getAttribute("currentPage")*2).getPrice() %> </span><font> 元</font> </div>
                   <input type="hidden" class="CarValue_1165" value="{img:'/Uploads/PhotoGalley/2016-02-22/56caabd482cc0.JPG-thumb.JPG',id:'1165',price:'22.8',status:'加入对比',title:'奔驰C级 2013 款 1.8T 自动 C260 CGI时尚型',url:'/Cars/index/channel/2/id/1165.html'}" />
                   </span> </div>
-                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_1165">立即抢订</a>  <span>已有188人关注此车</span> </div>
+                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_1165">立即抢订</a>  </div>
               </div>
             </li>
-            <li class="clearfix" style="position: relative;"> <span class="carImg left dInline"><a href="maiche_show.html" target="_blank">
-              <div class="car_bg"> </div>
-              <img src="images/3.png"  width="300" /></a> </span>
-              <div class="carTxt right dInline">
-                <h2><a href="maiche_show.html" target="_blank">E客 E1S标准版</a></h2>
-                <p> <span>购买时间：2017-01</span> <span>已行驶：2.2千公里</span>  </p>
-                <div class="price clearfix" style="margin:8px 0;">
-                  <div class="left dInline pNum" style="width:110px;"> <font>价格</font><br/>
-                    <span class="num nBlue">4000 </span><font> 元</font> </div>
-                  <span class="num1 left" style="height:43px; width:450px;padding-top:10px;"><em>新车价：7999元</em><br/>
-                  为您节省：3999元 
-                  <input type="hidden" class="CarValue_993" value="{img:'/Uploads/PhotoGalley/2016-02-21/56c95a5130b4c.jpg-thumb.jpg',id:'993',price:'24.8',status:'加入对比',title:'奔驰C级 2013 款 1.8T 自动 C260时尚型 Grand Edition',url:'/Cars/index/channel/2/id/993.html'}" />
-                  </span> </div>
-                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_993">立即抢订</a>  <span>已有468人关注此车</span> </div>
-              </div>
-            </li>
-            
-            
+	           <%if(carList.size()!=(int)session.getAttribute("currentPage")*2+1){ %>
+	           <li class="clearfix" style="position: relative;"> <span class="carImg left dInline">
+	            <a href="maiche_show.html" target="_blank">
+	              <div class="car_bg"> </div>
+	              <img src="images/3.png"  width="300" /></a> </span>
+	              <div class="carTxt right dInline">
+	                <h2><a href="maiche_show.html" target="_blank"><%=carList.get(cPage*2+1).getBrand()+" "+carList.get(cPage*2+1).getStyle() %></a></h2>
+	                <p> <span>购买时间：<%=carList.get(cPage*2+1).getBuy_Time() %></span> <span>已行驶：<%=carList.get(cPage*2+1).getMile() %>公里</span>   </p>
+	                <div class="price clearfix" style="margin:8px 0;">
+	                  <div class="left dInline pNum" style="width:110px;"> <font>价格</font><br/>
+	                    <span class="num nBlue"><%=carList.get(cPage*2+1).getPrice() %> </span><font> 元</font> </div>
+	                  <input type="hidden" class="CarValue_1165" value="{img:'/Uploads/PhotoGalley/2016-02-22/56caabd482cc0.JPG-thumb.JPG',id:'1165',price:'22.8',status:'加入对比',title:'奔驰C级 2013 款 1.8T 自动 C260 CGI时尚型',url:'/Cars/index/channel/2/id/1165.html'}" />
+	                  </span> </div>
+	                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_1165">立即抢订</a>  </div>
+	              </div>
+	            </li>
+	            <%} %>
+            <%} %>
           </ul>
-          <div class="pages"> <a class="on" href="#">1</a><a class="" href="#">2</a><a class="" href="#">3</a><a class="" href="#">4</a><a class="" href="#">5</a> <a href="#">>></a> <a href="#">32</a> </div>
+          <div class="pages"> <a class="on" href="#">1</a><a class="" href="#">2</a><a class="" href="#">3</a><a class="" href="#">4</a><a class="" href="#">5</a> <a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")+1 %>">>></a> <a href="carPageJump.jsp?cPage=<%=pageCount++ %>"><%=session.getAttribute("pageCount")%></a> </div>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ public class Car {
 	public void setBuy_Time(String buyTime) {
 		this.buyTime = buyTime;
 	}
-	public String geetBuy_Time() {
+	public String getBuy_Time() {
 		return buyTime;
 	}
 	public String getPrice() {
