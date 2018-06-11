@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
+<%@ page import="dao.*" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,21 +21,29 @@
 <![endif]-->
 </head>
 <body>
+<%
+	User user=(User)session.getAttribute("user");
+%>
 <div id="header">
   <div class="top">
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
-      <a  href="index.html">首页</a>
+      <a  href="index.jsp">首页</a>
       <a href="buyCar.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
       <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
-      <a href="about.html">关于我们</a>
+      <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
-				<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
-                </span> </div>
+      <%if(session.getAttribute("user")==null){ %>
+	  	<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
+      <%}
+      else{%>
+      	<a href="会员中心首页.jsp" class="b-login" id="b-login"><%=user.getUserId() %></a>|<a href="signOut.jsp" id="b-regist">退出</a>|&nbsp;&nbsp;&nbsp;&nbsp;
+      <%} %>
+      </span> </div>
   </div>
   
 </div>
@@ -55,42 +67,39 @@
     <div class="wrap">
       <div class="in-tit clearfix">
         <h1 class="left dInline"> 今日推荐 </h1>
-        <!--<div class="end-time right dInline">
-					距离结束只剩下<b>20</b>小时<b>50</b>分<b>18</b>秒
-				</div>--> 
       </div>
       <div class="inBox clearfix">
-        <div class="thPic left dInline pve tBox"> <a href="#"  target="_blank"> <img src="images/21.jpg" class="imgVt" /> <span class="icon icon_hd"></span></a> </div>
+        <div class="thPic left dInline pve tBox"> <a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/21.jpg" class="imgVt" /> </a> </div>
         <div class="tBox right pve dInline thPicRight">
           <div class="thPic1 left dInline pve">
             <ul class="clearfix">
-              <li class="pve"> <a href="#" target="_blank"> <span class="icon icon_th"></span>
+              <li class="pve"> <a href="goToCarDetail.jsp?car_id=208" target="_blank"> <span class="icon icon_th"></span>
                 <div class="car-pic"> <img src="images/12.png" /> </div>
-                <div class="price"> <font></font> <span class="num nBlue">2000 </span> <font>&nbsp;&nbsp;元</font> </div>
-                <p>雅迪“米纳”电动车</p>
+                <div class="price"> <font></font> <span class="num nBlue">1255 </span> <font>&nbsp;&nbsp;元</font> </div>
+                <p>新日 踏板车</p>
                 </a></li>
                 
-                <li class="pve"> <a href="#" target="_blank"> <span class="icon icon_th"></span>
+                <li class="pve"> <a href="goToCarDetail.jsp?car_id=209" target="_blank"> <span class="icon icon_th"></span>
                 <div class="car-pic"> <img src="images/13.png" /> </div>
-                <div class="price"> <font></font> <span class="num nBlue">1800 </span> <font>&nbsp;&nbsp;元</font> </div>
-                <p>雅迪“莱客”电动车</p>
+                <div class="price"> <font></font> <span class="num nBlue">2556 </span> <font>&nbsp;&nbsp;元</font> </div>
+                <p>E客 两轮</p>
                 </a></li>
                 
-                <li class="pve"> <a href="#" target="_blank"> <span class="icon icon_th"></span>
+                <li class="pve"> <a href="goToCarDetail.jsp?car_id=210" target="_blank"> <span class="icon icon_th"></span>
                 <div class="car-pic"> <img src="images/14.png" /> </div>
-                <div class="price"> <font></font> <span class="num nBlue">2200 </span> <font>&nbsp;&nbsp;元</font> </div>
-                <p>新日“苹果”电动车</p>
+                <div class="price"> <font></font> <span class="num nBlue">2653 </span> <font>&nbsp;&nbsp;元</font> </div>
+                <p>雅迪 跑车</p>
                 </a></li>
                 
-                <li class="pve"> <a href="#" target="_blank"> <span class="icon icon_th"></span>
+                <li class="pve"> <a href="goToCarDetail.jsp?car_id=211" target="_blank"> <span class="icon icon_th"></span>
                 <div class="car-pic"> <img src="images/15.png" /> </div>
-                <div class="price"> <font></font> <span class="num nBlue">2000 </span> <font>&nbsp;&nbsp;元</font> </div>
-                <p>新日“风情2代”电动车</p>
+                <div class="price"> <font></font> <span class="num nBlue">1259 </span> <font>&nbsp;&nbsp;元</font> </div>
+                <p>其他 跑车</p>
                 </a></li>
               
             </ul>
           </div>
-          <div class="pve right dInline hdPic"> <a href="pp96_/ord/sta.html"  target="_blank"> <img src="images/2.jpg" height="475" class="imgVt" /> <span class="icon icon_hd"></span></a> </div>
+          <div class="pve right dInline hdPic"> <a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/2.jpg" height="475" class="imgVt" /> </a> </div>
         </div>
       </div>
     </div>
@@ -116,7 +125,7 @@
           <div class="jpDl" style="display: block;">
             <ul class="clearfix">
               <li class="clearfix" style="position: relative;"> 
-               <a href="#" target="_blank">
+               <a href="goToCarDetail.jsp?car_id=208" target="_blank">
                 <div class="carImg left dInline"> 
                   <img src="images/3.png" width="266" /> 
                 </div>
@@ -124,13 +133,13 @@
                 <div class="right carTxt dInline pve">
                   <div class="c-txt">
                     <h3>
-                     <a href="#" target="_blank">E客 E1S标准版</a>
+                     <a href="goToCarDetail.jsp?car_id=208" target="_blank">新日 踏板车</a>
                     </h3>
                     
-                    <p>2017-08 | 60V26AH电芯电池+普通7H充电器</p>
+                    <p>2016-06 | 60V26AH电芯电池+普通7H充电器</p>
                     <div class="price">
                       <p>价格：</p>
-                      <i>￥</i> <span class="num nBlue">4000 </span><font> 元</font>  
+                      <i>￥</i> <span class="num nBlue">1255</span><font> 元</font>  
                     </div>
                     
                   </div>
@@ -139,58 +148,58 @@
                 </a>
                 </li>
                 
-                <li class="clearfix" style="position: relative;"> <a href="#" target="_blank">
-                <div class="carImg left dInline"> <img src="images/3.png" width="266" /> </div>
+                <li class="clearfix" style="position: relative;"> <a href="goToCarDetail.jsp?car_id=209" target="_blank">
+                <div class="carImg left dInline"> <img src="images/12.png" width="266" /> </div>
                 <div class="right carTxt right dInline pve">
                   <div class="c-txt">
                     <h3>
-                     <a href="#" target="_blank">E客 E1S标准版</a>
+                     <a href="goToCarDetail.jsp?car_id=209" target="_blank">E客 两轮车</a>
                     </h3>
                     
-                    <p>2017-08 | 60V26AH电芯电池+普通7H充电器</p>
+                    <p>2014-02 | 48V26AH电芯电池+普通7H充电器</p>
                     <div class="price">
                       <p>价格：</p>
-                      <i>￥</i> <span class="num nBlue">4000 </span><font> 元</font>  </div>
+                      <i>￥</i> <span class="num nBlue">1885 </span><font> 元</font>  </div>
+                  </div>
+                </div>
+                </a></li>
+                
+                <li class="clearfix" style="position: relative;"> <a href="goToCarDetail.jsp?car_id=210" target="_blank">
+                <div class="carImg left dInline"> <img src="images/13.png" width="266" /> </div>
+                <div class="right carTxt right dInline pve">
+                  <div class="c-txt">
+                    <h3>
+                     <a href="goToCarDetail.jsp?car_id=210" target="_blank">雅迪 跑车</a>
+                    </h3>
+                    
+                    <p>2017-01 | 60V26AH电芯电池+普通7H充电器</p>
+                    <div class="price">
+                      <p>价格：</p>
+                      <i>￥</i> <span class="num nBlue">2445 </span><font> 元</font>  </div>
                   </div>
                 </div>
                 </a></li>
                 
                 <li class="clearfix" style="position: relative;"> <a href="#" target="_blank">
-                <div class="carImg left dInline"> <img src="images/3.png" width="266" /> </div>
+                <div class="carImg left dInline"> <img src="images/14.png" width="266" /> </div>
                 <div class="right carTxt right dInline pve">
                   <div class="c-txt">
                     <h3>
-                     <a href="#" target="_blank">E客 E1S标准版</a>
+                     <a href="goToCarDetail.jsp?car_id=211" target="_blank">其他 跑车</a>
                     </h3>
                     
-                    <p>2017-08 | 60V26AH电芯电池+普通7H充电器</p>
+                    <p>2018-05 | 60V26AH电芯电池+普通7H充电器</p>
                     <div class="price">
                       <p>价格：</p>
-                      <i>￥</i> <span class="num nBlue">4000 </span><font> 元</font>  </div>
-                  </div>
-                </div>
-                </a></li>
-                
-                <li class="clearfix" style="position: relative;"> <a href="#" target="_blank">
-                <div class="carImg left dInline"> <img src="images/3.png" width="266" /> </div>
-                <div class="right carTxt right dInline pve">
-                  <div class="c-txt">
-                    <h3>
-                     <a href="#" target="_blank">E客 E1S标准版</a>
-                    </h3>
-                    
-                    <p>2017-08 | 60V26AH电芯电池+普通7H充电器</p>
-                    <div class="price">
-                      <p>价格：</p>
-                      <i>￥</i> <span class="num nBlue">4000 </span><font> 元</font>  </div>
+                      <i>￥</i> <span class="num nBlue">1259 </span><font> 元</font>  </div>
                   </div>
                 </div>
                 </a></li>
               
             </ul>
-            <div class="proMore"> <a href="Cars/index/channel/2.html" target="_blank">查看更多>></a> </div>
+            <div class="proMore"> <a href="buyCar.jsp" target="_blank">查看更多>></a> </div>
           </div>
-          
+          <!-- 
           <div class="jpDl">
             <ul class="clearfix">
               <li class="clearfix" style="position: relative;"> <a href="#" target="_blank">
@@ -224,13 +233,14 @@
                   </div>
                 </div>
                 </a></li>
-                
              
               
             </ul>
-            <div class="proMore"> <a href="Cars/index/channel/2.html" target="_blank">查看更多>></a> </div>
+            <div class="proMore"> 
+            	<a href="buyCar.jsp" target="_blank">查看更多>></a> 
+            </div>
           </div>
-         
+          -->
 
         </div>
       </div>
@@ -239,15 +249,15 @@
   <div class="mDiv">
     <div class="wrap">
       <div class="in-tit clearfix">
-        <h1 class="left dInline"> 热门榜单 </h1>
+        <h1 class="left dInline"> 私人定制 </h1>
       </div>
       <div class="bdBox clearfix">
         <div class="left dLeft dInline">
           <ul class="clearfix">
-            <li><a href="#"  target="_blank"> <img src="images/55d2c89756ef2.jpg" /></a></li>
-            <li><a href="#"  target="_blank"> <img src="images/31.jpg" /></a></li>
-            <li><a href="#"  target="_blank"> <img src="images/32.jpg" /></a></li>
-            <li><a href="#"  target="_blank"> <img src="images/55d2c8e954f6f.jpg" /></a></li>
+            <li><a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/empty.png" /></a></li>
+            <li><a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/31.jpg" /></a></li>
+            <li><a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/32.jpg" /></a></li>
+            <li><a href="javascript:return false;" style="cursor: default;"  target="_blank"> <img src="images/empty.png" /></a></li>
           </ul>
         </div>
         <div class="left dRight dInline">
@@ -258,84 +268,65 @@ input:-moz-placeholder, textarea:-moz-placeholder {color:#000;}
 input::-moz-placeholder, textarea::-moz-placeholder {color:#000;}
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
 </style>
-          <form class="dForm" name="dForm" id="dForm" method="post" enctype="multipart/form-data" onsubmit="return cleckform();">
+          <form class="dForm" name="dForm" id="dForm" method="post"  action="checkUserOnLineSrdzSmall.jsp">
             <h2>私人订制</h2>
             <p>专业车辆顾问为您服务</p>
             <table>
-              <tr>
-                <td><select class="Smakeid" name="makeid"  id="" placeholder="所属品牌">
-                    <option value=""> 选择品牌（必选）</option>
-                    <option value="9" > A 爱玛</option>
-					<option value="91" > E E客</option>
-					<option value="92" > T 台铃</option>
-                    <option value="93" > X 新日</option>
-                    <option value="94" > X 小刀</option>
-                    <option value="95" > X 小牛</option>
-					<option value="96" > Y 雅迪</option>
-					<option value="97" > 其他</option>
-                  </select></td>
-              </tr>
-              <tr>
-                <td><div id="xlselect">
-                    <select name="modeid">
-                      <option>选择车系(必选)</option>
-                       <option value="9" > 小龟</option>
-						<option value="91" > 其他</option>
-                    </select>
-                  </div></td>
-              </tr>
-              <tr>
-                <td><select name="years">
-                    <option value="不限">选择使用年限</option>
-                    <option value="1年以内">1年以内</option>
-                    <option value="2年以内">2年以内</option>
-                    <option value="3年以内">3年以内</option>
-                    <option value="3-5年">3-5年</option>
-                    <option value="5年以上">5年以上</option>
-                  </select></td>
-              </tr>
-              <tr>
-                <td><input type="text" name="dprice" placeholder="最少预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
-                  <input type="text" name="hprice" placeholder="最多预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
-                  元 </td>
-              </tr>
-              <tr>
-                <td><input type="text" value="" placeholder="计划购买时间" style="width:95%" class="form_datetime cInput" name="buytime" data-date-format="yyyy-mm"></td>
-              </tr>
-              <tr>
-                <td><textarea name="content" placeholder="其他要求（例如车身颜色、行驶里程要求等）"></textarea></td>
-              </tr>
-              <tr>
-                <td><input id="input-phone" type="hidden" name="mobile" value="" />
-                  <input id="input-verify" type="hidden" name="verify" value="" />
-                  <input type="button" value="提交需求" class="sBtn" style=" padding:0;" id="sendMESS" /></td>
-              </tr>
-            </table>
+            <tr>
+              <td><select class="Smakeid" name="brand"  id="brand" placeholder="所属品牌">
+                  <option value=""> 选择品牌</option>
+                  <option value="爱玛" >爱玛</option>
+				  <option value="E客" >E客</option>
+			      <option value="台铃" >台铃</option>
+                  <option value="新日" >新日</option>
+                  <option value="小刀" >小刀</option>
+                  <option value="小牛" >小牛</option>
+			      <option value="雅迪" >雅迪</option> 
+			      <option value="其他" >其他</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td><div id="xlselect">
+                  <select name="style" id="style">
+                    <option value=""> 选择车系（必选）</option>
+					<option value="两轮" >两轮</option>
+					<option value="电动摩托车" >电动摩托车</option>
+					<option value="跑车" >跑车</option>
+					<option value="踏板车" >踏板车</option>
+					<option value="折叠式" >折叠式</option>
+					<option value="其他" >其他</option>
+                  </select>
+                </div></td>
+            </tr>
+            <tr>
+              <td><select name="age" id="age">
+                  <option value="不限">选择使用年限</option>
+                  <option value="1年以内">1年以内</option>
+                  <option value="2年以内">2年以内</option>
+                  <option value="3年以内">3年以内</option>
+                  <option value="3-5年">3-5年</option>
+                  <option value="5年以上">5年以上</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="minPrice" name="minPrice" placeholder="最少预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                <input type="text" id="maxPrice" name="maxPrice" placeholder="最多预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                万元 </td>
+            </tr>
+            <tr>
+              <td><input type="text" value="" placeholder="计划购买时间" style="width:95%" class="form_datetime cInput" name="buytime" data-date-format="yyyy-mm"></td>
+            </tr>
+            <tr>
+              <td><textarea name="content" placeholder="其他要求（例如车身和内饰颜色、行驶里程要求等）"></textarea></td>
+            </tr>
+            <tr>
+              <td><input id="input-phone" type="hidden" name="mobile" value="" />
+                <input id="input-verify" type="hidden" name="verify" value="" />
+                <input type="button" value="提交需求" class="sBtn" style=" padding:0;" id="sendMESS" onclick="return checkInput()" /></td>
+            </tr>
+          </table>
           </form>
-          <div id="popBoxYzm" style="display:none">
-            <div class="popForm">
-              <div class="p-detail">
-                <form action="" enctype="multipart/form-data" method="post" name="yzmcheck" id="yzmcheck">
-                  <ul class="login-items" style="width:100%">
-                    <li>
-                      <label>手机号</label>
-                      <input type="text" value="" maxlength="32"  name="mobile" id="shoujihao" style="width:120px">
-                      <input type="checkbox" name="remembermobile" style=" width:auto; margin:10px 20px 0" id="remembermobile" />
-                      <label>记住此号</label>
-                    </li>
-                    <li>
-                      <label>验证码</label>
-                      <input type="text" value="" maxlength="16"  name="verify" id="yanzhengma" style="width:120px; margin-right:20px;">
-                      <img id="yzcode" width="100" height="42" alt="点击切换" > </li>
-                  </ul>
-                  <div class="login-button">
-                    <input type="button"  value="立即提交" class="fM" onclick="sendtosend()" style="line-height:20px" />
-                  </div>
-                </form>
-              </div>
-              <a class="closed">×</a> </div>
-          </div>
-          <input type="hidden" id="ckmobile" value="1" />
+          
           
         </div>
       </div>
@@ -565,7 +556,41 @@ $(function(){
 	})
 })
 </script> -->
-
+<script type="text/javascript">
+var checkInput=function(){
+	var makeCar=$("#brand").val();
+		var styleCar=$("#style").val();
+		var buytimeval=$("#age").val();
+		var mialval=$("#minPrice").val();
+		var price=$("#maxPrice").val();
+		if(makeCar==0){
+			alert("请选择品牌");
+			$("#brand").focus();
+			return false;
+		}
+		if(styleCar==0){
+			alert("请选择车型");
+			$("#style").focus();
+			return false;
+		}
+		if(buytimeval==0){
+			alert("请选择车龄");
+			$("#age").focus();
+			return false;
+		}
+		if(mialval==''){
+			alert("请输入最少预算");
+			$("#mialval").focus();
+			return false;
+		}
+		if(price==''){
+			alert("请输入最大预算");
+			$("#price").focus();
+			return false;
+		}
+		document.getElementById('dForm').submit();
+}
+</script>
 
 
 </body>

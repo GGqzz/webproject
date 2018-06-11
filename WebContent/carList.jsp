@@ -34,24 +34,31 @@
 		session.setAttribute("currentPage", cPage);
 	}
 %>
-
+<%
+	User user=(User)session.getAttribute("user");
+%>
 </head>
 <body>
 <div id="header">
   <div class="top">
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
-      <a  href="index.html">首页</a>
+      <a  href="index.jsp">首页</a>
       <a href="buyCar.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
       <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
-      <a href="about.html">关于我们</a>
+      <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
-				<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
-                </span> </div>
+      <%if(session.getAttribute("user")==null){ %>
+	  	<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
+      <%}
+      else{%>
+      	<a href="会员中心首页.jsp" class="b-login" id="b-login"><%=user.getUserId() %></a>|<a href="signOut.jsp" id="b-regist">退出</a>|&nbsp;&nbsp;&nbsp;&nbsp;
+      <%} %>
+      </span> </div>
   </div>
   
 </div>
@@ -61,14 +68,11 @@
 </style>
 <div id="about">
   <div class="mTags" style="margin-bottom:20px">
-    <div class="wrap"> <a href="#">福大二手车交易</a>><a href="#">我要买车</a> </div>
+    <div class="wrap"> <a href="index.jsp">福大二手车交易</a>><a href="buyCar.jsp">我要买车</a> </div>
   </div>
   <div class="wrap text-left">
     <div class="carfliter-box">
       <div class="carfl-tit clearfix">
-        <div class="result-box left dInline" style="height:auto;"> <span class="left">您的选择：</span>
-          <div class="s-form left clearfix" style="white-space:normal; width:auto"></div>
-        </div>
         <a href="checkUserOnLineSrdz.jsp" class="dBtn right">在线私人订制</a> </div>
       <div class="condition">
         <ul>

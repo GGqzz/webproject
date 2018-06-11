@@ -19,7 +19,7 @@
 		}
 		else{
 			cardao.changeOrderState(con, car, user, "预约中");
-			output.print("<script>alert(\"预约成功!请等待卖家给予回复,可在个人中心看到订单状态。\");window.location.href=\"会员中心_我的需求.html\";</script>");
+			output.print("<script>alert(\"预约成功!请等待卖家给予回复,可在个人中心看到订单状态。\");window.location.href=\"会员中心_我的需求.jsp\";</script>");
 		}
 	}
 	else{

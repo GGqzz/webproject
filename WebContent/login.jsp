@@ -18,7 +18,7 @@
 	}
 	else{
 		session.setAttribute("user", user);
-		output.print("<script>alert('登录成功,欢迎！');window.location.href=\"index.html\";</script>");
+		output.print("<script>alert('登录成功,欢迎！');window.location.href=\"index.jsp\";</script>");
 	}
 	output.flush();
 	output.close();

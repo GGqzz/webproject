@@ -29,7 +29,7 @@
 		car.setAge(String.valueOf(age));
 		CarDAO cardao=new CarDAO();
 		cardao.addCar(con, car, user.getUserId());
-		output.print("<script>alert('您的爱车已经发布,请去个人中心查看！');window.location.href=\"会员中心_我的车.html\";</script>");
+		output.print("<script>alert('您的爱车已经发布,请去个人中心查看！');window.location.href=\"会员中心_我的车.jsp\";</script>");
 	}
 
 %>

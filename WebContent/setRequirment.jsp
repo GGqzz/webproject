@@ -24,7 +24,7 @@
 	rdddao.addRequirement_DingDan(con, rdd, user.getUserId());
 	
 	PrintWriter output=response.getWriter();
-	output.print("<script>alert('私人定制发布成功，请到个人中心查看！');window.location.href=\"会员中心_我的需求.html\";</script>");
+	output.print("<script>alert('私人定制发布成功，请到个人中心查看！');window.location.href=\"会员中心_我的需求.jsp\";</script>");
 	
 	
 %>

@@ -1,74 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.Vector" %>
+<%@ page import="model.*" %>
+<%@ page import="dao.*" %>
 <!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>关于我们</title>
+<title>个人中心</title>
 <meta name="description" content="二手车"/>
-<meta name="keywords" content="福州二手车,福大二手车"> 
+<meta name="keywords" content="福州二手车,福大二手车">
 <link rel="stylesheet" type="text/css" href="css/base.css">
 <link rel="stylesheet" type="text/css" href="css/layout.css">
-<link rel="stylesheet" href="css/about.css">
+<link rel="stylesheet" type="text/css" href="css/hurst.css">
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+
 <!--[if IE 6]>
 <script type="text/javascript" src="js/DD_belatedPNG.js"></script>
 <script>
         DD_belatedPNG.fix('*');
     </script>
-<![endif]--> 
+<![endif]-->
+
 </head>                                        
 <body>
+<%
+	User user=(User)session.getAttribute("user");
+%>
 <div id="header">
   <div class="top">
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
-      <a  href="index.html">首页</a>
+      <a  href="index.jsp">首页</a>
       <a href="buyCar.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
       <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
-      <a href="about.html">关于我们</a>
+      <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
-				<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
-                </span> </div>
+      <%if(session.getAttribute("user")==null){ %>
+	  	<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
+      <%}
+      else{%>
+      	<a href="会员中心首页.jsp" class="b-login" id="b-login"><%=user.getUserId() %></a>|<a href="signOut.jsp" id="b-regist">退出</a>|&nbsp;&nbsp;&nbsp;&nbsp;
+      <%} %>
+      </span> </div>
   </div>
   
 </div>
 
 <div id="about">
 	<div class="mTags wrap">
-		<a href="#">福大二手车交易</a>><a href="36">关于我们</a>
+		<a href="#">福大二手车交易</a>><a href="/member/index/channel/7.html">个人中心</a>
 	</div>
-	<div class="wAbout">
-		<div class="a-wa">
-			<div class="wrap a-nav">
+	<div class="mebBox">
+		<div class="meb-cont clearfix wrap">
+			<div class="meb-nav left dInline">
 				<ul class="clearfix">
-					<li class="on"><a href="#">团队简介</a></li><li><a href="#">联系我们</a></li></ul>
+					<li class="on"><a href="会员中心首页.jsp">个人中心</a></li>
+                    <li ><a href="会员中心_我的需求.jsp">我的需求</a></li>
+                    <li><a href="会员中心_我的车.jsp">我的车</a></li>
+                    <li><a href="会员中心_账户管理.jsp">账户管理</a></li>				
+                </ul>
 			</div>
-		</div>
-		<div class="a-wb">
-			<div class="wrap">
-				<h1>团队简介</h1>
-				<div class="a-div">
-					<p style="text-align: center;"><br/></p>
-					<p style="text-align: center;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp;<span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;">福大二手车交易为web课程设计，设计此网站的初衷是为福大的同学们提供一个便捷的电动车交易平台，方便即将毕业的同学们处理电动车，同时也给想要买车的同学们一个便捷、优惠的买车平台。</span></span></p>
-					<p style="text-align: center;"><span style="font-size: 14px; font-family: 微软雅黑, &#39;Microsoft YaHei&#39;;">&nbsp; &nbsp;网站由团队四人通力协作完成，团队成员有：林、覃、蔡、班</span></p><p><br/></p><p style="text-align: center;"><br/></p><p><br/></p>				</div>
-				<div class="a-div" id="dizhi">
-					<div class="a-xi clearfix">
-					  <p>
-						  <strong>联系我们</strong><br/>
-							联系电话 ：********* <br/>
-							邮箱：******@qq.com<br/>	
-							官方微博：@福大二手车交易<br/>
-							微信号：福大二手车交易
-					  </p>
+			<div class="meb-right right dInline">
+				<div class="mr-top">
+    <div class="mr-top-div clearfix">
+        <span class="left">
+            <img src="images/photo.png"/>
+        </span>
+        <div class="mr-infor left dInline">
+             <h2>您好！ <b><%=user.getUserId() %></b></h2>
+              <p> 手机：<%=user.getTelephoneNumber() %>   邮箱：<%=user.getMail() %>  |  [ <a href="会员中心_账户管理.jsp">管理账户信息</a> ] </p>
+        </div>
+    </div>
+</div>
+				<div class="mr-detail">
+					<div class="me-box">
+						<div class="mx-a">
+							<ul class="clearfix">
+								<li>
+									<img src="images/hu1.png"/>
+									<span>您目前有 <a href="/Member/need/channel/7/list/11"><b>1</b></a> 个订单未付定金</span>
+								</li>
+								
+							</ul>
+						</div>
+						<div class="mx-b">
+							<ul>
+								<li class="clearfix">
+									<span class="left">
+										<img src="images/hu3.png"/>
+									</span>
+									<div class="mb-txt left dInline">
+										<h2>马上参加 <a href="/Tailor/index/channel/4.html">私人定制</a> </h2>
+										<p>没有您满意的车型吗，马上参加量身定制可预订指定车型，为您量身定制</p>
+									</div>
+								</li>
+								<!--<li class="clearfix last">
+									<span class="left">
+										<img src="images/hu4.png"/>
+									</span>
+									<div class="mb-txt left dInline">
+										<h2>您可以定制 <a href="#">到车通知</a> </h2>
+										<p>不想在每天数以万计的车源中错过自己满意的二手车吗？亿金收集您的需求，第一时间为您推送符合您的信息</p>
+									</div>
+								</li>-->
+							</ul>
+						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!--footer部分开始-->
 
 <div id="footer">
   <div class="foot-a1">
@@ -127,7 +178,7 @@
      </div>
 </div>
 
-<!--右侧内容的开始-->
+<!--footer部分结束-->
 <div id="miniBus" style="right:-270px;">
 	<div class="mini-bar">
 		<div class="mini-barlist">
@@ -196,10 +247,6 @@
 	</div>
 </div>
 
-<!--右侧内容的结束-->
-
-<!--会员登录与注册开始-->
-
 <div id="popBox">
 	<div class="popCont">
 		<a class="p_closed">关闭</a>
@@ -222,7 +269,7 @@
 			        <div class="login-check">
 			            <input type="checkbox" name="checkbox" style=" width:auto;" />
 			            <label>记住我</label>
-			            <a href="../../../../../Meet/editPass">忘记登录密码？</a>
+			            <a href="/Meet/editPass">忘记登录密码？</a>
 			        </div>
 			        <div class="login-button">
                     	<input type="hidden" value="" name="carid" class="ordercarid" />
@@ -268,113 +315,11 @@
 	</div>
 </div>
 
-<!--会员登录与注册开始-->
-
-
-
 <script type="text/javascript" src="js/miniBar.js"></script>
 <script type="text/javascript" src="js/lg_reg.js"></script>
 
-<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
-<script type="text/javascript">
-    //创建和初始化地图函数：
-    function initMap(){
-        createMap();//创建地图
-        setMapEvent();//设置地图事件
-        addMapControl();//向地图添加控件
-        addMarker();//向地图中添加marker
-    }
-    
-    //创建地图函数：
-    function createMap(){
-        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
-        var point = new BMap.Point(113.688899,34.753367);//定义一个中心点坐标
-        map.centerAndZoom(point,17);//设定地图的中心点和坐标并将地图显示在地图容器中
-        window.map = map;//将map变量存储在全局
-    }
-    
-    //地图事件设置函数：
-    function setMapEvent(){
-        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
-        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
-        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
-        map.enableKeyboard();//启用键盘上下左右键移动地图
-    }
-    
-    //地图控件添加函数：
-    function addMapControl(){
-        //向地图中添加缩放控件
-	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-	map.addControl(ctrl_nav);
-        //向地图中添加缩略图控件
-	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
-	map.addControl(ctrl_ove);
-        //向地图中添加比例尺控件
-	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-	map.addControl(ctrl_sca);
-    }
-    
-    //标注点数组
-    var markerArr = [{title:"亿金汽车",content:"地址：紫荆山东大街裕鸿花园<br/>电话：400-888-666",point:"113.688297|34.753857",isOpen:0,icon:{w:23,h:25,l:46,t:21,x:9,lb:12}}
-		 ];
-    //创建marker
-    function addMarker(){
-        for(var i=0;i<markerArr.length;i++){
-            var json = markerArr[i];
-            var p0 = json.point.split("|")[0];
-            var p1 = json.point.split("|")[1];
-            var point = new BMap.Point(p0,p1);
-			var iconImg = createIcon(json.icon);
-            var marker = new BMap.Marker(point,{icon:iconImg});
-			var iw = createInfoWindow(i);
-			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
-			marker.setLabel(label);
-            map.addOverlay(marker);
-            label.setStyle({
-                        borderColor:"#808080",
-                        color:"#333",
-                        cursor:"pointer"
-            });
-			
-			(function(){
-				var index = i;
-				var _iw = createInfoWindow(i);
-				var _marker = marker;
-				_marker.addEventListener("click",function(){
-				    this.openInfoWindow(_iw);
-			    });
-			    _iw.addEventListener("open",function(){
-				    _marker.getLabel().hide();
-			    })
-			    _iw.addEventListener("close",function(){
-				    _marker.getLabel().show();
-			    })
-				label.addEventListener("click",function(){
-				    _marker.openInfoWindow(_iw);
-			    })
-				if(!!json.isOpen){
-					label.hide();
-					_marker.openInfoWindow(_iw);
-				}
-			})()
-        }
-    }
-    //创建InfoWindow
-    function createInfoWindow(i){
-        var json = markerArr[i];
-        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
-        return iw;
-    }
-    //创建一个Icon
-    function createIcon(json){
-        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
-        return icon;
-    }
-    
-    initMap();//创建和初始化地图
-</script>
 
-
+<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Faa70c6792578150b40ad413464080efa' type='text/javascript'%3E%3C/script%3E")) </script>
 
 </body>
 </html>
