@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.Vector" %>
+<%@ page import="model.*" %>
+<%@ page import="dao.*" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,10 +27,19 @@
     </script>
 <![endif]-->
 </head>
+
+<%
+	Vector<Car> carList=new Vector<Car>();
+	carList=(Vector<Car>)session.getAttribute("carList");
+	Car car=new Car();
+	car=carList.get(Integer.parseInt(request.getParameter("carNumber")));
+	
+%>
+
 <body>
 <div id="header">
   <div class="top">
-    <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
+    <div class="wrap clearfix"> <a href="javascript:return false;" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.html">首页</a>
       <a href="buyCar.jsp">我要买车</a>
@@ -36,8 +50,8 @@
       <a href="about.html">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
-				<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
-                </span> </div>
+		<a href="sign.html" class="b-login" id="b-login">登录</a>|<a href="sign.html" id="b-regist">注册</a>|&nbsp;&nbsp;&nbsp;&nbsp;		
+      </span> </div>
   </div>
   
 </div>
@@ -52,7 +66,7 @@
 #jShow{position:absolute;left:0;top:0;color:#fff;background:#d00;width:20px;text-align: center;z-index: 100;padding:10px;font-size:18px;font-weight: bold;}
 </style>
 <div id="about">
-  <div class="mTags wrap"> <a href="#">福大二手车交易</a>><a href="#">我要买车</a>><a href="#">商品详情</a> <span class="right">对这辆车不满意，我要 <a href="#">私人订制</a></span> </div>
+  <div class="mTags wrap"> <a href="index.html">福大二手车交易</a>><a href="#" onclick="javascript:history.back(-1);">我要买车</a>><a href="#">商品详情</a> <span class="right">对这辆车不满意，我要 <a href="srdz.html">私人订制</a></span> </div>
   <div class="wrap clearfix buyTop" style="padding-bottom:40px;">
     <div class="left dInline" style="width:592px;" >
       <!--图片切换部分开始-->
@@ -80,27 +94,25 @@
       <!--图片切换部分结束-->
     </div>
     <div class="buyTxt right dInline">
-      <h1>E客 E1S标准版</h1>
+      <h1><%=car.getBrand()+" "+car.getStyle() %></h1>
       <div class="byDl clearfix">
         <div class="price" style="width:235px;">
           <p>
                                 价格：</p>
-          <span class="num nBlue"> 4000 </span> <font>元</font>
-          <p style="padding-top:6px;">新车价:7999 <span style="color:#666"> </span></p>
-          <div class="" style="color:#2e71b8;"> 为您节省:3999 </div>
+          <span class="num nBlue"> <%=car.getPrice() %> </span> <font>元</font>
         </div>
         
       </div>
       <div class="byDl clearfix byDl_tab"> <span class="left bItem">
         <div> 购买时间
-          <p>2016-07</p>
+          <p><%=car.getBuy_Time() %></p>
         </div>
         </span> <span class="left bItem">
         <div> 行驶里程
-          <p>2.6千公里</p>
+          <p><%=car.getMile() %>公里</p>
         </div>
         </span> </div>
-      <div class="byBtn clearfix"> <a class="by_qd b-login" href="javascript:void(0)" >立即抢定</a>
+      <div class="byBtn clearfix"> <a class="by_qd b-login" href="setOrder.jsp?car_id=<%=car.getCar_id() %>" >立即抢定</a>
         
         <!--<a href="#">置换</a>--> 
         
@@ -117,7 +129,7 @@
       </div>
       <div class="b-cont">
         <div id="cBox1" class="c_box">
-          <h2>E客 E1S标准版</h2>
+          <h2><%=car.getBrand()+" "+car.getStyle() %></h2>
           <div class="cbox-a">
             <div class="ca-dl"> <span class="caItem on">基本信息</span>
               <div class="clearfix">
@@ -125,11 +137,11 @@
                   <table>
                     <tr>
                       <td width="270">购买时间</td>
-                      <td>2016-7</td>
+                      <td><%=car.getBuy_Time() %></td>
                     </tr>
                     <tr>
                       <td class="ca-td1">车身颜色</td>
-                      <td class="ca-td1">灰色 (15737112660)</td>
+                      <td class="ca-td1">灰色 </td>
                     </tr>
                   </table>
                 </div>
@@ -143,6 +155,10 @@
                       <td class="ca-td1">充电器</td>
                       <td class="ca-td1">普通7H充电器</td>
                     </tr>
+                    <tr>
+                      <td width="270">价格</td>
+                      <td><%=car.getPrice() %>元</td>
+                    </tr>
                   </table>
                 </div>
                 <div class="jb_infor left">
@@ -154,7 +170,7 @@
                     </tr>
                     <tr>
                       <td class="ca-td1">行驶里程</td>
-                      <td class="ca-td1">1千公里</td>
+                      <td class="ca-td1"><%=car.getMile() %>公里</td>
                     </tr>
                   </table>
                 </div>
@@ -193,55 +209,31 @@
     <div class="y_like">
       <h1>您可能会喜欢</h1>
       <ul class="clearfix">
-        <li style="width:250px; height:333px;"> <a href="1164.html" style="width:auto; padding:40px 20px;"> <img src="images/14.png" width="204" height="136" />
-          <h3>新日“苹果”电动车</h3>
-          <div class="price"> 寄售
-            价 <span class="num nBlue">3000</span> 元 <font> 省：￥ 1000</font> </div>
-          <p>2017-05 | 1.1千公里 </p>
+        <li style="width:250px; height:333px;"> <a href="carDetail.jsp?carNumber=0" style="width:auto; padding:40px 20px;"> <img src="images/14.png" width="204" height="136" />
+          <h3><%=carList.get(0).getBrand()+" "+carList.get(0).getStyle() %></h3>
+          <div class="price"> 
+            价 <span class="num nBlue"><%=carList.get(0).getPrice() %></span> 元</div>
+          <p><%=carList.get(0).getBuy_Time() %> | <%=carList.get(0).getMile() %>公里 </p>
           </a> </li>
-        <li style="width:250px; height:333px;"> <a href="1163.html" style="width:auto; padding:40px 20px;"> <img src="images/15.png" width="205" height="135" />
-          <h3>新日“风情2代”电动车</h3>
-          <div class="price">                             价格 <span class="num nBlue">2500</span> 元 <font> 省：￥ 1000</font> </div>
-          <p>2016-11 | 1.6千里 </p>
+        <li style="width:250px; height:333px;"> <a href="carDetail.jsp?carNumber=1" style="width:auto; padding:40px 20px;"> <img src="images/15.png" width="205" height="135" />
+          <h3><%=carList.get(1).getBrand()+" "+carList.get(1).getStyle() %></h3>
+          <div class="price">价格 <span class="num nBlue"><%=carList.get(1).getPrice() %></span> 元 </div>
+          <p><%=carList.get(1).getBuy_Time() %> | <%=carList.get(1).getMile() %>千里 </p>
         </a> </li>
         <li style="width:250px; height:333px;"> <a href="1135.html" style="width:auto; padding:40px 20px;"> <img src="images/13.png" width="191" height="136" />
-          <h3>雅迪“莱客”电动车</h3>
-          <div class="price"> 寄售
-            价 <span class="num nBlue">2500</span> 元 <font> 省：￥ 1500</font> </div>
-          <p>2016-05 | 1.0千公里 </p>
+          <h3><%=carList.get(2).getBrand()+" "+carList.get(2).getStyle() %></h3>
+          <div class="price"> 
+            价 <span class="num nBlue"><%=carList.get(2).getPrice() %></span> 元 </div>
+          <p><%=carList.get(2).getBuy_Time() %> | <%=carList.get(2).getMile() %>公里 </p>
           </a> </li>
         <li style="width:250px; height:333px;"> <a href="946.html" style="width:auto; padding:40px 20px;"> <img src="images/12.png" width="202" height="133" />
-          <h3>雅迪“米纳”电动车</h3>
-          <div class="price">                             价格 <span class="num nBlue">2000</span> 元 <font> 省：￥ 1500</font> </div>
-          <p>2015-05 | 3.2千公里 </p>
+          <h3><%=carList.get(3).getBrand()+" "+carList.get(3).getStyle() %></h3>
+          <div class="price">价格 <span class="num nBlue"><%=carList.get(3).getPrice() %></span> 元 </div>
+          <p><%=carList.get(3).getBuy_Time() %> | <%=carList.get(3).getMile() %>公里 </p>
           </a> </li>
       </ul>
     </div>
   </div>
-</div>
-<div id="popBoxYzm" style="display:none">
-  <div class="popForm">
-    <div class="p-detail">
-      <form action="" enctype="multipart/form-data" method="post" onsubmit="return popYzm();" name="yzmcheck" id="yzmcheck">
-        <ul class="login-items" style="width:100%">
-          <li>
-            <label>手机号</label>
-            <input type="text" value="" maxlength="32"  name="mobile" style="width:120px">
-            <input type="checkbox" style=" width:auto; margin:10px 20px 0" value="1" name="ckmobile" />
-            <label>记住此号</label>
-          </li>
-          <li>
-            <label>验证码</label>
-            <input type="text" value="" maxlength="16"  name="verify" style="width:120px; margin-right:20px;">
-        </ul>
-        <div class="login-button">
-          <input type="hidden" value="" name="sta" id="stames" />
-          <input type="hidden" value="2" name="carid" id="caridmes" />
-          <input type="button"  value="立即提交" class="fM" onclick="$('#yzmcheck').submit()" style="line-height:20px" />
-        </div>
-      </form>
-    </div>
-    <a class="closed">×</a> </div>
 </div>
 
 
@@ -397,35 +389,6 @@
 			            <i class="icons ver-green-down"></i>
 			            <b>您的信息已通过256位SGC加密保护，数据传输安全</b>
 			        </div>-->
-        </form>
-      </div>
-      <div class="p-dl">
-        <form class="registForm" onsubmit="return regcheck();" enctype="multipart/form-data" method="post" name="reg" id="reg">
-          <ul class="login-items">
-            <li class="clearfix">
-              <input class="input" name="mobile" id="mobile" type="text" value="" placeholder="手机号码（登录帐号）">
-            </li>
-            <li class="clearfix">
-              <input class="input left" type="text" value=""  name="verify" placeholder="输入验证码" style="width:100px;" />
-              <div id="send"><a href="#" class="send_code right">获取验证码</a></div>
-            </li>
-            <li class="clearfix">
-              <input class="input" type="text" value=""  name="realname" placeholder="姓名">
-            </li>
-            <li class="clearfix sex">
-              <input type="radio" checked="" name="gender" value="M" />
-              男&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="gender" value="F" />
-              女 </li>
-            <li class="clearfix">
-              <input id="" class="input" type="password" name="password" value="" placeholder="输入密码（六位字符）">
-            </li>
-          </ul>
-          <div class="login-button">
-            <input type="hidden" value="" name="carid" class="ordercarid" />
-            <input type="hidden" value="" name="carstatus" class="orderstatus" />
-            <input type="button"  value="立即注册" class="fM" onclick="$('#reg').submit()" />
-          </div>
         </form>
       </div>
     </div>

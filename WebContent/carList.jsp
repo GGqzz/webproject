@@ -173,8 +173,14 @@
         <div class="cs-tit">
           <div class="clearfix">
             <div class="ctLeft left dInline">
-              <div class="ct-a left dInline"> <a class="on" href="#" ><i>全部</i></a></div>
-              <div class="cs_sub"> 排序： <a class="cs-a1" href="#">默认<img src="images/down.gif"/></a> <a href="2/sta/A/ord/E/url_form.html">价格<img src="images/up.gif"/></a> <a href="2/sta/A/ord/F/url_form.html">车龄<img src="images/up.gif"/></a> </div>
+              <div class="ct-a left dInline"> 
+              	<a class="on" href="javascript:void(0);" ><i>全部</i></a>
+              </div>
+              <div class="cs_sub"> 排序： 
+	              <a class="cs-a1" href="buyCar.jsp">默认<img src="images/down.gif"/></a> 
+	              <a href="sortByPrice.jsp">价格<img src="images/up.gif"/></a> 
+	              <a href="sortByAge.jsp">车龄<img src="images/up.gif"/></a> 
+              </div>
             </div>
             <div class="right cpages"> <%=(int)session.getAttribute("currentPage")+1 %>/<%=(int)session.getAttribute("pageCount") %> <a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")-1 %>">&lt;</a><a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")+1 %>">&gt;</a> </div>
           </div>
@@ -184,40 +190,45 @@
           <ul>
           <%if(carList.size()!=0){ %>
             <li class="clearfix" style="position: relative;"> <span class="carImg left dInline">
-            <a href="maiche_show.html" target="_blank">
+            <a href="carDetail.jsp?carNumber=<%=cPage*2 %>" target="_blank">
               <div class="car_bg"> </div>
               <img src="images/3.png"  width="300" /></a> </span>
               <div class="carTxt right dInline">
-                <h2><a href="maiche_show.html" target="_blank"><%=carList.get(cPage*2).getBrand()+" "+carList.get(cPage*2).getStyle() %></a></h2>
+                <h2><a href="carDetail.jsp?carNumber=<%=cPage*2 %>" target="_blank"><%=carList.get(cPage*2).getBrand()+" "+carList.get(cPage*2).getStyle() %></a></h2>
                 <p> <span>购买时间：<%=carList.get((int)session.getAttribute("currentPage")*2).getBuy_Time() %></span> <span>已行驶：<%=carList.get((int)session.getAttribute("currentPage")*2).getMile() %>公里</span>   </p>
                 <div class="price clearfix" style="margin:8px 0;">
                   <div class="left dInline pNum" style="width:110px;"> <font>价格</font><br/>
                     <span class="num nBlue"><%=carList.get((int)session.getAttribute("currentPage")*2).getPrice() %> </span><font> 元</font> </div>
                   <input type="hidden" class="CarValue_1165" value="{img:'/Uploads/PhotoGalley/2016-02-22/56caabd482cc0.JPG-thumb.JPG',id:'1165',price:'22.8',status:'加入对比',title:'奔驰C级 2013 款 1.8T 自动 C260 CGI时尚型',url:'/Cars/index/channel/2/id/1165.html'}" />
                   </span> </div>
-                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_1165">立即抢订</a>  </div>
+                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="carDetail.jsp?carNumber=<%=cPage*2 %>" class="cs-q b-login" >立即抢订</a>  </div>
               </div>
             </li>
 	           <%if(carList.size()!=(int)session.getAttribute("currentPage")*2+1){ %>
 	           <li class="clearfix" style="position: relative;"> <span class="carImg left dInline">
-	            <a href="maiche_show.html" target="_blank">
+	            <a href="carDetail.jsp?carNumber=<%=cPage*2+1 %>" target="_blank">
 	              <div class="car_bg"> </div>
 	              <img src="images/3.png"  width="300" /></a> </span>
 	              <div class="carTxt right dInline">
-	                <h2><a href="maiche_show.html" target="_blank"><%=carList.get(cPage*2+1).getBrand()+" "+carList.get(cPage*2+1).getStyle() %></a></h2>
+	                <h2><a href="carDetail.jsp?carNumber=<%=cPage*2+1 %>" target="_blank"><%=carList.get(cPage*2+1).getBrand()+" "+carList.get(cPage*2+1).getStyle() %></a></h2>
 	                <p> <span>购买时间：<%=carList.get(cPage*2+1).getBuy_Time() %></span> <span>已行驶：<%=carList.get(cPage*2+1).getMile() %>公里</span>   </p>
 	                <div class="price clearfix" style="margin:8px 0;">
 	                  <div class="left dInline pNum" style="width:110px;"> <font>价格</font><br/>
 	                    <span class="num nBlue"><%=carList.get(cPage*2+1).getPrice() %> </span><font> 元</font> </div>
 	                  <input type="hidden" class="CarValue_1165" value="{img:'/Uploads/PhotoGalley/2016-02-22/56caabd482cc0.JPG-thumb.JPG',id:'1165',price:'22.8',status:'加入对比',title:'奔驰C级 2013 款 1.8T 自动 C260 CGI时尚型',url:'/Cars/index/channel/2/id/1165.html'}" />
 	                  </span> </div>
-	                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="javascript:void(0)" class="cs-q b-login" id="Order_1165">立即抢订</a>  </div>
+	                <div class="cs_bt clearfix" style="padding-top:7px;"> <a href="carDetail.jsp?carNumber=<%=cPage*2+1 %>" class="cs-q b-login" id="Order_1165">立即抢订</a>  </div>
 	              </div>
 	            </li>
 	            <%} %>
             <%} %>
           </ul>
-          <div class="pages"> <a class="on" href="#">1</a><a class="" href="#">2</a><a class="" href="#">3</a><a class="" href="#">4</a><a class="" href="#">5</a> <a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")+1 %>">>></a> <a href="carPageJump.jsp?cPage=<%=pageCount++ %>"><%=session.getAttribute("pageCount")%></a> </div>
+          <div class="pages"> 
+	          <a class="on" href="carPageJump.jsp?cPage=<%=0 %>">1</a>
+	          <a class="" href="carPageJump.jsp?cPage=<%=1 %>">2</a>
+	          <a href="carPageJump.jsp?cPage=<%=(int)session.getAttribute("currentPage")+1 %>">>></a> 
+	          <a href="carPageJump.jsp?cPage=<%=pageCount++ %>"><%=session.getAttribute("pageCount")%></a> 
+          </div>
         </div>
       </div>
     </div>
@@ -288,29 +299,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
             </tr>
           </table>
         </form>
-        <div id="popBoxYzm" style="display:none">
-          <div class="popForm">
-            <div class="p-detail">
-              <form action="" enctype="multipart/form-data" method="post" name="yzmcheck" id="yzmcheck">
-                <ul class="login-items" style="width:100%">
-                  <li>
-                    <label>手机号</label>
-                    <input type="text" value="" maxlength="32"  name="mobile" id="shoujihao" style="width:120px">
-                    <input type="checkbox" name="remembermobile" style=" width:auto; margin:10px 20px 0" id="remembermobile" />
-                    <label>记住此号</label>
-                  </li>
-                  <li>
-                    <label>验证码</label>
-                    <input type="text" value="" maxlength="16"  name="verify" id="yanzhengma" style="width:120px; margin-right:20px;">
-                    <img  id="yzcode" width="100" height="42" alt="点击切换" onclick="this.src='../../../Admin/Login/buildVerify.html'"> </li>
-                </ul>
-                <div class="login-button">
-                  <input type="button"  value="立即提交" class="fM" onclick="sendtosend()" style="line-height:20px" />
-                </div>
-              </form>
-            </div>
-            <a class="closed">×</a> </div>
-        </div>
         <input type="hidden" id="ckmobile" value="1" />
 
 <script type="text/livescript">
@@ -540,35 +528,6 @@ var checkInput=function(){
 			            <i class="icons ver-green-down"></i>
 			            <b>您的信息已通过256位SGC加密保护，数据传输安全</b>
 			        </div>-->
-        </form>
-      </div>
-      <div class="p-dl">
-        <form class="registForm" onsubmit="return regcheck();" enctype="multipart/form-data" method="post" name="reg" id="reg">
-          <ul class="login-items">
-            <li class="clearfix">
-              <input class="input" name="mobile" id="mobile" type="text" value="" placeholder="手机号码（登录帐号）">
-            </li>
-            <li class="clearfix">
-              <input class="input left" type="text" value=""  name="verify" placeholder="输入验证码" style="width:100px;" />
-              <div id="send"><a href="#" class="send_code right">获取验证码</a></div>
-            </li>
-            <li class="clearfix">
-              <input class="input" type="text" value=""  name="realname" placeholder="姓名">
-            </li>
-            <li class="clearfix sex">
-              <input type="radio" checked="" name="gender" value="M" />
-              男&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="gender" value="F" />
-              女 </li>
-            <li class="clearfix">
-              <input id="" class="input" type="password" name="password" value="" placeholder="输入密码（六位字符）">
-            </li>
-          </ul>
-          <div class="login-button">
-            <input type="hidden" value="" name="carid" class="ordercarid" />
-            <input type="hidden" value="" name="carstatus" class="orderstatus" />
-            <input type="button"  value="立即注册" class="fM" onclick="$('#reg').submit()" />
-          </div>
         </form>
       </div>
     </div>

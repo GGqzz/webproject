@@ -8,6 +8,6 @@
 	if(cPage<(int)session.getAttribute("pageCount")&&cPage>=0){
 		session.setAttribute("currentPage", cPage);
 	}
-	System.out.println(session.getAttribute("pageCount")+" "+cPage);
+	//System.out.println(session.getAttribute("pageCount")+" "+session.getAttribute("currentPage"));
 	output.print("<script>window.location.href=\"carList.jsp\";</script>");
 %>
