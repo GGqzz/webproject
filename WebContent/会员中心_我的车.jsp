@@ -1,3 +1,5 @@
+<%@page import="dbutil.DBUtil"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector" %>
@@ -26,13 +28,18 @@
 
 <%
 	User user=(User)session.getAttribute("user");
+	CarDAO cardao=new CarDAO();
+	Connection connection=DBUtil.getConnection();
+	Vector<Car> carList=cardao.getCarListByUserId(connection, user.getUserId());
+	
+	DBUtil.closeConnection(connection);
 %>
 <div id="header">
   <div class="top">
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
-      <a href="buyCar.jsp">我要买车</a>
+      <a href="preCarList.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
@@ -73,7 +80,7 @@
           </div>
         </div>
         <div class="mr-detail">
-          <div class="mr-tab clearfix"> <a class="on">我购买的车</a> 
+          <div class="mr-tab clearfix"> <a class="on">我的车</a> 
             <!--<a>售后历史</a>--> 
           </div>
           <div class="me-box me-box1">
@@ -85,12 +92,62 @@
                   <div class="hPages"></div>
                 </ul>
               </div>
-              <div class="me-more"> <a href="/Cars/index/channel/2.html">
-                <h3>您目前没有，没有购买的车型！</h3>
-                <p>点击这里查看更多车型...</p>
-                </a> </div>
-            </div>
-         
+              <div class="me-dl" style="display:block;">
+							<div class="me-one" id="me-o">
+								<ul class="cs-list">
+									<ul class="cs-list">
+              <%if(carList.size()==0){ %>
+	              <div class="me-more"> <a href="checkUserOnLineSell.jsp">
+	                <h3>您目前没有发售车辆</h3>
+	                <p>点击这里发布爱车...</p>
+	                </a> </div>
+	            </div>
+         	  <%}
+              	else { 
+         	  		for(int i=0;i<carList.size();i++){
+         	 	 %>	
+										<li class="clearfix" style="position: relative;">	
+											<span class="carImg left dInline">
+												<a href="javascript:return false;" target="_blank">
+												<div class="car_bg"> </div>		
+												<img src="images/3.png"  width="300" />
+												</a>	
+											</span>	
+											<div class="pa" style="z-index:1111px;left:6px;top:10px;position: absolute;">		
+					
+											</div>	
+												<div class="carTxt right dInline">
+												<h2><a href="javascript:return false;" target="_blank"><%=carList.get(i).getBrand()+" "+carList.get(i).getStyle() %></a></h2>
+												<p>
+													<span>购买时间：<%=carList.get(i).getBuy_Time() %></span> 			
+													<span>已行驶：<%=carList.get(i).getMile() %>公里</span>					
+												</p>		
+											<div class="price clearfix" style="margin:5px 0;">			
+											<div class="left dInline pNum">				
+											<font>售价</font><br/>				
+											<span class="num nBlue"><%=carList.get(i).getPrice() %>				
+											</span><font> 元</font>			 
+											</div>			
+											<span class="num1 left" style="height:43px;padding-top:10px;">				
+					
+											</span>		
+											</div>		
+											<div class="cs_ding clearfix">			
+											<div class="cdLeft left dInline" style="width:auto;">					
+											</div>			
+											</div>	
+											</div>
+											</li>
+         	 	 <%	
+         	  		}
+         	 	 %>
+         	  <%} %>
+         	  								</div>
+											</div>
+         	  							</ul>
+											<div class="hPages">    
+										</div>								
+									</ul>
           </div>
         </div>
       </div>

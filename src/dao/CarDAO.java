@@ -42,9 +42,43 @@ public class CarDAO {
 		}
 	}
 	
-	public Vector<Car> getCarList(Connection connection){
+	public Vector<Car> getCarList(Connection connection,String brand,String style,float minPrice,float maxPrice,String minAge,String maxAge){
 		Vector<Car> carList=new Vector<Car>();
-		String sql="select * from car order by car_id";
+		System.out.println(brand+" "+style+" "+minPrice+" "+maxPrice+" "+minPrice+" "+maxPrice+" "+minAge+" "+maxAge);
+		String sql="select * from car ";
+		int flag=0;
+		if(brand.equals("不限")&&style.equals("不限")&&minPrice==0&&maxPrice==0&&minAge.equals("0")&&maxAge.equals("0")) {
+			sql+="order by car_id";
+		}
+		else {
+			sql+=" where";
+			if(!brand.equals("不限")) {
+				sql+=" brand='"+brand+"'";
+				flag=1;
+			}
+			if(!style.equals("不限")) {
+				if(flag==1) {
+					sql+=" and";
+				}
+				sql+=" style='"+style+"'";
+				flag=1;
+			}
+			if(minPrice!=0) {
+				if(flag==1) {
+					sql+=" and";
+				}
+				sql+=" price between "+minPrice+" and "+maxPrice;
+				flag=1;
+			}
+			if(!minAge.equals("0")||!maxAge.equals("0")) {
+				if(flag==1) {
+					sql+=" and";
+				}
+				sql+=" cast(age as signed) between '"+minAge+"' and '"+maxAge+"'";
+				flag=1;
+			}
+		}
+		System.out.println(sql);						
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet rSet=preparedStatement.executeQuery();
@@ -168,5 +202,28 @@ public class CarDAO {
 			e.printStackTrace();
 		}
 		return car;
+	}
+	
+	public Vector<Car> getCarListByUserId(Connection connection,String user_id){
+		Vector<Car> carList=new Vector<Car>();
+		String sql="select * from car,dingdan where car.car_id=dingdan.car_id and user_id='"+user_id+"'";
+		try {
+			PreparedStatement preparedStatement=connection.prepareStatement(sql);
+			ResultSet rSet=preparedStatement.executeQuery();
+			while(rSet.next()) {
+				Car car=new Car();
+				car.setAge(rSet.getString("age"));
+				car.setBrand(rSet.getString("brand"));
+				car.setStyle(rSet.getString("style"));
+				car.setPrice(rSet.getString("price"));
+				car.setMile(rSet.getString("mile"));
+				car.setBuy_Time(rSet.getString("buy_time"));
+				car.setCar_id(rSet.getInt("car_id"));
+				carList.add(car);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return carList;
 	}
 }

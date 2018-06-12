@@ -9,6 +9,13 @@ public class Requirement_DingDan {
 	private String age;
 	private String predict_time;
 	private String other_require;
+	private String require_state;
+	public String getRequireState() {
+		return this.require_state;
+	}
+	public void setRequireState(String require_state) {
+		this.require_state=require_state;
+	}
 	public int getRequire_id() {
 		return require_id;
 	}

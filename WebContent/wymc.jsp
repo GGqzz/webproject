@@ -33,7 +33,7 @@
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
-      <a href="buyCar.jsp">我要买车</a>
+      <a href="preCarList.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->

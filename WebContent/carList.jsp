@@ -44,7 +44,7 @@
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
-      <a href="buyCar.jsp">我要买车</a>
+      <a href="preCarList.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
@@ -78,28 +78,28 @@
         <ul>
           <li class=""> <span class="c-name left">品牌：</span>
             <div class="spec-moudle left dInline"> 
-            <a href="#" ><img src="images/logo1.png" width="81" style="height:32px;"/></a>
-            <a href="#"><img src="images/logo2.png" width="108" style="height:32px;"/></a>
-            <a href="#"><img src="images/logo (1).png" width="97" style="height:32px;"/></a>
-            <a href="#"><img src="images/22.jpg" width="102" style="height:32px;"/></a>
-            <a href="#"><img src="images/23.jpg" width="81" style="height:32px;"/></a>
-            <a href="#" ><img src="images/24.png" style="height:32px;"/></a>
+	            <a href="#" ><img src="images/logo1.png" width="81" style="height:32px;"/></a>
+	            <a href="#"><img src="images/logo2.png" width="108" style="height:32px;"/></a>
+	            <a href="#"><img src="images/logo (1).png" width="97" style="height:32px;"/></a>
+	            <a href="#"><img src="images/22.jpg" width="102" style="height:32px;"/></a>
+	            <a href="#"><img src="images/23.jpg" width="81" style="height:32px;"/></a>
+	            <a href="#" ><img src="images/24.png" style="height:32px;"/></a>
            
-              <div class="pro_smore">
-                <div class="clearfix ps-a">
-                  <select class="left" name="brandSelect"  id="Smakeid" placeholder="所属品牌">
-                    	<option value=""> 不限</option>
-	                    <option value="爱玛" >爱玛</option>
-						<option value="E客" >E客</option>
-						<option value="台铃" >台铃</option>
-	                    <option value="新日" >新日</option>
-	                    <option value="小刀" >小刀</option>
-	                    <option value="小牛" >小牛</option>
-						<option value="雅迪" >雅迪</option> 
-						<option value="其他" >其他</option>
-                  </select>
-                </div>
-              </div>
+	              <div class="pro_smore">
+	                <div class="clearfix ps-a">
+	                  <select class="left" name="brandSelect" onchange="brandChange()" id="Smakeid" placeholder="所属品牌">
+	                    	<option value="不限"> 不限</option>
+		                    <option value="爱玛" >爱玛</option>
+							<option value="E客" >E客</option>
+							<option value="台铃" >台铃</option>
+		                    <option value="新日" >新日</option>
+		                    <option value="小刀" >小刀</option>
+		                    <option value="小牛" >小牛</option>
+							<option value="雅迪" >雅迪</option> 
+							<option value="其他" >其他</option>
+	                  </select>
+	                </div>
+	              </div>
             </div>
           </li>
           <li class=""> <span class="c-name left">价格：</span>
@@ -116,7 +116,7 @@
                       <td>-</td>
                       <td><input name="price_R" type="text" class="sTxt" id="price_R" value="" /></td>
                       <td>元</td>
-                      <td><input type="submit" value="确定" class="sBtn" id="tjprice" style="line-height:10px" /></td>
+                      <td><input type="button" value="确定" class="sBtn" id="tjprice" style="line-height:10px" onclick="priceChange()" /></td>
                     </tr>
                   </table>
                 </div>
@@ -133,8 +133,8 @@
              	 更多</a> 
              	  <div class="pro_smore">
                 <div class="clearfix ps-a">
-                  <select name="style" id="style">
-                    <option value="">不限</option>
+                  <select  id="styled" onchange="styleChange()">
+                    <option value="不限">不限</option>
 					<option value="两轮" >两轮</option>
 					<option value="电动摩托车" >电动摩托车</option>
 					<option value="跑车" >跑车</option>
@@ -160,7 +160,7 @@
                       <td>-</td>
                       <td><input name="age_R" type="text" class="sTxt" id="cheling_R" value="" /></td>
                       <td>年</td>
-                      <td><input type="submit" value="确定" class="sBtn" id="tjcheling" style="line-height:10px" /></td>
+                      <td><input type="button" value="确定" onclick="ageChange()" class="sBtn" id="tjcheling" style="line-height:10px" /></td>
                     </tr>
                   </table>
                 </div>
@@ -288,7 +288,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#000;}
             <tr>
               <td><input type="text" id="minPrice" name="minPrice" placeholder="最少预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
                 <input type="text" id="maxPrice" name="maxPrice" placeholder="最多预算" value="" class="cInput" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
-                万元 </td>
+                元 </td>
             </tr>
             <tr>
               <td><input type="text" value="" placeholder="计划购买时间" style="width:95%" class="form_datetime cInput" name="buytime" data-date-format="yyyy-mm"></td>
@@ -373,7 +373,27 @@ var checkInput=function(){
 		document.getElementById('dForm').submit();
 }
 
+var ageChange=function(){
+	var minAge=$("#cheling_L").val();
+	var maxAge=$("#cheling_R").val();
+	window.location.href="ageChange.jsp?minAge="+minAge+"&maxAge="+maxAge;
+}
 
+var priceChange=function(){
+	var minPrice=$("#price_L").val();
+	var maxPrice=$("#price_R").val();
+	window.location.href="priceChange.jsp?minPrice="+minPrice+"&maxPrice="+maxPrice;
+}
+
+var brandChange=function(){
+	var brand=$("#Smakeid").val();
+	window.location.href="brandChange.jsp?brand="+brand;
+}
+
+var styleChange=function(){
+	var style=$("#styled").val();
+	window.location.href="styleChange.jsp?style="+style;
+}
 </script>
 <div id="footer">
   <div class="foot-a1">
@@ -567,6 +587,9 @@ jQuery(".txtMarquee-top").slide({mainCell:".bd ul",autoPlay:true,effect:"topMarq
 		autoclose:true	
 
     });
+    
+    
+    
 </script> 
 
 </body>

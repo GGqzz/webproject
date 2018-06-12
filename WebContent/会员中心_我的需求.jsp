@@ -1,3 +1,5 @@
+<%@page import="dbutil.DBUtil"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.Vector" %>
@@ -29,13 +31,21 @@
 <body>
 <%
 	User user=(User)session.getAttribute("user");
+	CarDAO cardao=new CarDAO();
+	DingDanDAO dingDanDAO=new DingDanDAO();
+	Requirement_DingDanDAO rdd=new Requirement_DingDanDAO();
+	Connection connection=DBUtil.getConnection();
+	Vector<Car> carList=cardao.getCarListByUserId(connection, user.getUserId());
+	Vector<DingDan> dingDanList=dingDanDAO.getUserDingDan(connection, user.getUserId());
+	Vector<Requirement_DingDan> requirement_DingDanList=rdd.getUserReuirementDingDanList(connection, user.getUserId());		
+	DBUtil.closeConnection(connection);
 %>
 <div id="header">
   <div class="top">
     <div class="wrap clearfix"> <a href="#" class="logo left"><img src="images/logo11.png"/></a>
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
-      <a href="buyCar.jsp">我要买车</a>
+      <a href="preCarList.jsp">我要买车</a>
       <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
@@ -82,31 +92,66 @@
 </div>
 				<div class="mr-detail">
 					<div class="mr-tab clearfix">
-						<a class="on">我的订单</a>
-						<a>私人订制</a>
-						<a>卖车需求</a>
-						
+						<a>私人订制</a>						
 					</div>
 					<div class="me-box">
 						<div class="me-dl" style="display:block;">
-<div class="me-one" id="me-o">
+							<div class="me-one" id="me-o">
 								<ul class="cs-list">
-									<ul class="cs-list"><li class="clearfix" style="position: relative;">	<span class="carImg left dInline"><a href="/Cars/index/channel/2/id/1176.html" target="_blank"><div class="car_bg"> </div>		<img src="images/3.png" onerror="this.src='images/pro4.jpg'" width="300" /></a>	</span>	<div class="pa" style="z-index:1111px;left:6px;top:10px;position: absolute;">		<img src="images/jishou.png">	</div>	<div class="carTxt right dInline">		<h2><a href="/Cars/index/channel/2/id/1176.html" target="_blank">E客 E1S标准版</a></h2>		<p>			<span>购买时间：2017-09</span> 			<span>已行驶：1千公里</span>					</p>		<div class="price clearfix" style="margin:5px 0;">			<div class="left dInline pNum">				<font>寄售价</font><br/>				<span class="num nBlue">3500				</span><font> 元</font>			 </div>			<span class="num1 left" style="height:43px;padding-top:10px;"><em>新车价：7999元</em><br/>				为您节省：4499元 				<input type="hidden" class="CarValue_1176" value="{img:'/',id:'88',price:'11.9',status:'',title:'E客 E1S标准版',url:'/Cars/index/channel/2/id/1176.html'}" />			</span>		</div>		<div class="cs_ding clearfix">			<div class="cdLeft left dInline" style="width:auto;">				<span>定金：<b>1000</b> 元   </span>				<span>订单创建：2018-05-29</span>				<span>订单状态：未付定金</span>			</div>			<a href="javascript:void(0);" style="width:50px;color:#4573af; float:right;" onclick="delOrder('delete','88')">取消订单</a>			<a href="#" style="width:50px; margin:auto 10px;color:#4573af; float:right;">支付全款</a>			<a href="#" style="width:50px;color:#4573af; float:right;">补交定金</a>		</div>	</div></li></ul><div class="hPages">    </div>								</ul>
+									<ul class="cs-list">
+										<%if(requirement_DingDanList.size()==0){ %>
+										<div class="me-dl">
+											<div class="me-more">
+												<a href="buyCar.jsp">
+												<h3>您目前没有私人订制！</h3>
+												<p>点击这里进行私人订制...</p>
+												</a>
+											</div>						
+										</div>
+										<%} 
+										else{
+											for(int i=0;i<requirement_DingDanList.size();i++){
+										%>
+										<li class="clearfix" style="position: relative;">	
+											<div class="pa" style="z-index:1111px;left:6px;top:10px;position: absolute;">		
+					
+											</div>	
+												<div class="carTxt right dInline">
+												<h2><%=requirement_DingDanList.get(i).getBrand()+" "+requirement_DingDanList.get(i).getStyle() %></a></h2>
+												<p>			
+												<span>要求车龄：<%=requirement_DingDanList.get(i).getAge() %></span> 						
+												</p>		
+												<div class="price clearfix" style="margin:5px 0;">			
+													<div class="left dInline pNum">				
+														<font>你的最低预算</font><br/>				
+														<span class="num nBlue"><%=requirement_DingDanList.get(i).getMin_price() %></span>
+														<font> 元</font>	<br/>		
+														<font>你的最高预算</font><br/>				
+														<span class="num nBlue"><%=requirement_DingDanList.get(i).getMax_price() %></span>
+														<font> 元</font>		 
+													</div>			
+														<span class="num1 left" style="height:43px;padding-top:10px;">													
+												</div>		
+												<div class="cs_ding clearfix">			
+												<div class="cdLeft left dInline" style="width:auto;">									
+												<span>订单状态：<%=requirement_DingDanList.get(i).getRequireState() %></span>			
+												</div>			
+												<a href="deleteRequirement.jsp?require_id=<%=requirement_DingDanList.get(i).getRequire_id() %>" style="width:50px;color:#4573af; float:right;">取消订单</a>				
+												</div>	
+												</div>
+												</li>
+										<%}} %>
+										</ul>
+										<div class="hPages">    
+										</div>								
+									</ul>
 							</div>
-						
 						</div>
 						<div class="me-dl">
 							<div class="me-more">
-								<a href="/Tailor/index/channel/4.html">
-									<h3>您目前没有，买车需求！</h3>
-									<p>点击这里查看更多车型...</p>
-								</a>
-							</div>						</div>
-						<div class="me-dl">
-							<div class="me-more">
-								<a href="/Sales/index/channel/3.html">
+								<a href="checkUserOnLineSell.jsp">
 									<h3>您目前没有，卖车需求！</h3>
-									<p>点击这里查看更多车型...</p>
+									<p>点击这里发布爱车</p>
 								</a>
 							</div>						</div>
 						
@@ -191,56 +236,7 @@ $(function(){
 	})
 })
 </script>
-<div style="display:none;">
-	<div id="showdiv">
-		<div class="showTit">车贷计算器</div>
-		<form action="" enctype="multipart/form-data" name="suandk" id="suandk" onsubmit="return daikuanjisuan();">
-			<div class="buy_je" id="thisCarPrice">汽车金额 <strong>万</strong>元</div>
-			<div class="dk_div">
-				<div class="dk_tit clearfix yinhangselect">
-<span class="on" data-pk="0" data-type="中国工商银行" onclick="changeprice('yinhang','0','中国工商银行');">中国工商银行<i></i></span>
-						<span data-pk="1" data-type="平安银行" onclick="changeprice('yinhang','1','平安银行');">平安银行<i></i></span>				</div>
-				<div class="dk_dl">
-<ul>
-						<li class="clearfix shoufubili">
-							<label class="left">首付比例</label>
-							<div class="dk_tag left dInline">
-<span class="on" data-pk="30" data-type="中国工商银行" onclick="changeprice('shoufu','30');">30%</span>
-<span data-pk="50" data-type="中国工商银行" onclick="changeprice('shoufu','50');">50%</span>
-							</div>
-						</li>
-						<li class="clearfix fenqishu">
-							<label class="left" style="letter-spacing:8px;">分期数</label>
-							<div class="dk_tag left dInline">
-<span class="on" data-pk="3" data-type="中国工商银行" onclick="changeprice('fenqi','3');">3年（3×12期）</span>
-								<span data-pk="1" data-type="中国工商银行" onclick="changeprice('fenqi','1');" style="display:none" id="openclick">1年（1×12期）</span>
-							</div>
-						</li>
-					</ul>					<ul class="hide">						<li class="clearfix shoufubili">
-							<label class="left">首付比例</label>
-							<div class="dk_tag left dInline">
-<span class="on" data-pk="40" data-type="平安银行" onclick="changeprice('shoufu','40');">40%</span>
-								<span data-pk="50" data-type="平安银行" onclick="changeprice('shoufu','50');">50%</span>							</div>
-						</li>
-						<li class="clearfix fenqishu">
-							<label class="left" style="letter-spacing:8px;">分期数</label>
-							<div class="dk_tag left dInline">
-<span class="on" data-pk="3" data-type="平安银行" onclick="changeprice('fenqi','3');">3年（3×12期）</span>
-								<span data-pk="1" data-type="中国工商银行" onclick="changeprice('fenqi','1');" style="display:none" id="openclick">1年（1×12期）</span>
-							</div>
-						</li>
-					</ul>				</div>
-			</div>
-			<div class="dk_result">
-                <input type="hidden" name="mobile" value="" id="setmobile" />
-				<input type="hidden" name="carid" value="" id="thisCarId" />
-                <span id="changepriceHtml"></span>
-				<a href="javascript:void(0)" onclick="$('#suandk').submit()" class="dk_btn">贷款结果发送到手机</a>				<div class="dk_tel">咨询电话：400-003-7777</div>
-				<p>注：计算结果仅供查考，此车贷产品由诺信汽车金融提供</p>
-			</div>
-		</form>
-	</div>
-</div>
+
 <script>
 function JSuanQ(carid,price,descript){
 	$('#thisCarId').val(carid);
