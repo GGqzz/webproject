@@ -34,10 +34,10 @@
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
       <a href="preCarList.jsp">我要买车</a>
-      <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
+      <a href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
-      <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
+      <a class="on" id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
       <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
@@ -84,7 +84,7 @@
 							<ul class="clearfix">
 								<li>
 									<img src="images/hu1.png"/>
-									<span>您目前有 <a href="/Member/need/channel/7/list/11"><b>1</b></a> 个订单未付定金</span>
+									<span>福大二手车为您提供优质的服务</span>
 								</li>
 								
 							</ul>
@@ -92,13 +92,7 @@
 						<div class="mx-b">
 							<ul>
 								<li class="clearfix">
-									<span class="left">
-										<img src="images/hu3.png"/>
-									</span>
-									<div class="mb-txt left dInline">
-										<h2>马上参加 <a href="/Tailor/index/channel/4.html">私人定制</a> </h2>
-										<p>没有您满意的车型吗，马上参加量身定制可预订指定车型，为您量身定制</p>
-									</div>
+									
 								</li>
 								<!--<li class="clearfix last">
 									<span class="left">

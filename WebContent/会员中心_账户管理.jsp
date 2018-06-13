@@ -32,10 +32,10 @@
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
       <a href="preCarList.jsp">我要买车</a>
-      <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
+      <a href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
-      <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
+      <a class="on" id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
       <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
@@ -58,10 +58,10 @@
 		<div class="meb-cont clearfix wrap">
 			<div class="meb-nav left dInline">
 				<ul class="clearfix">
-					<li class="on"><a href="会员中心首页.jsp">个人中心</a></li>
+					<li ><a href="会员中心首页.jsp">个人中心</a></li>
                     <li ><a href="会员中心_我的需求.jsp">我的需求</a></li>
                     <li><a href="会员中心_我的车.jsp">我的车</a></li>
-                    <li><a href="会员中心_账户管理.jsp">账户管理</a></li>					
+                    <li class="on"><a href="会员中心_账户管理.jsp">账户管理</a></li>					
                 </ul>
 			</div>
 			<div class="meb-right right dInline">
@@ -85,41 +85,29 @@
 						<div class="me-dl" style="display:block;">
 							<div class="me-one">
 								<div class="accForm">
-									<form action="" enctype="multipart/form-data" name="editM" method="post" onsubmit="return checkpost();">
+									<form action="updateinformation.jsp?user_id=<%=user.getUserId() %>" name="editM" method="post" onsubmit="return checkpost();">
 										<div class="afl clearfix">
 											<label class="left">
 												手机号码
 											</label>
 											<div class="af-r left dInline">
-												<input type="text" class="ar-txt" name="mobile" placeholder="请输入手机号码" value=""  />
+												<input type="text" class="ar-txt" name="newMobile" placeholder="请输入手机号码" value=""  />
 											</div>
 										</div>
 										<div class="afl clearfix">
 											<label class="left">
-												姓名
+												地址
 											</label>
 											<div class="af-r left dInline">
-												<input type="text" class="ar-txt" name="realname" placeholder="请输入您的姓名" value="" />
+												<input type="text" class="ar-txt" name="newAddress" placeholder="请输入您的姓名" value="" />
 											</div>
-										</div>
-										<div class="afl clearfix">
-											<label class="left">
-												性别
-											</label>
-											<div class="af-r left dInline">
-												<span>
-													<input type="radio" name="gender" value="M"> 男
-												</span>
-												<span>
-													<input type="radio" name="gender" checked="" value="F"> 女
-												</span>											</div>
 										</div>
 										<div class="afl clearfix">
 											<label class="left">
 												邮箱
 											</label>
 											<div class="af-r left dInline">
-												<input type="text" class="ar-txt" name="email" placeholder="请输入您的邮箱" value="" />
+												<input type="text" class="ar-txt" name="newEmail" placeholder="请输入您的邮箱" value="" />
 											</div>
 										</div>
 										<div class="afl clearfix">
@@ -136,7 +124,7 @@
                         <div id="ps" class="me-dl" style="display:block;">
 							<div class="me-one">
 								<div class="accForm">
-									<form action="" enctype="multipart/form-data" name="editP" method="post" onsubmit="return checkPasspost();">
+									<form action="updatePassword.jsp?user_id=<%=user.getUserId() %>"  name="editP" method="post" onsubmit="return checkPasspost();">
 										<div class="afl clearfix">
 											<label class="left">
 												当前密码
@@ -150,7 +138,7 @@
 												新密码
 											</label>
 											<div class="af-r left dInline">
-												<input type="password" class="ar-txt" name="password1" placeholder="请输入新密码" value="" />
+												<input type="password" class="ar-txt" name="newPassword" placeholder="请输入新密码" value="" />
 											</div>
 										</div>
 										<div class="afl clearfix">

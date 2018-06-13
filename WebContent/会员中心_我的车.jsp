@@ -29,9 +29,10 @@
 <%
 	User user=(User)session.getAttribute("user");
 	CarDAO cardao=new CarDAO();
+	DingDanDAO dingDanDAO=new DingDanDAO();
 	Connection connection=DBUtil.getConnection();
 	Vector<Car> carList=cardao.getCarListByUserId(connection, user.getUserId());
-	
+	Vector<DingDan> dingDanList=dingDanDAO.getUserDingDan(connection, user.getUserId());
 	DBUtil.closeConnection(connection);
 %>
 <div id="header">
@@ -40,10 +41,10 @@
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
       <a href="preCarList.jsp">我要买车</a>
-      <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
+      <a href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
-      <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
+      <a class="on" id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
       <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
@@ -64,9 +65,9 @@
     <div class="meb-cont clearfix wrap">
       <div class="meb-nav left dInline">
         <ul class="clearfix">
-					<li class="on"><a href="会员中心首页.jsp">个人中心</a></li>
+					<li ><a href="会员中心首页.jsp">个人中心</a></li>
                     <li ><a href="会员中心_我的需求.jsp">我的需求</a></li>
-                    <li><a href="会员中心_我的车.jsp">我的车</a></li>
+                    <li class="on"><a href="会员中心_我的车.jsp">我的车</a></li>
                     <li><a href="会员中心_账户管理.jsp">账户管理</a></li>						
                 </ul>
       </div>
@@ -133,11 +134,20 @@
 											</span>		
 											</div>		
 											<div class="cs_ding clearfix">			
-											<div class="cdLeft left dInline" style="width:auto;">					
-											</div>			
-											</div>	
+														<div class="cdLeft left dInline" style="width:auto;">											
+															<span>订单状态：<%=dingDanList.get(i).getDingdan_state() %></span>	
+															<%if(dingDanList.get(i).getDingdan_state().equals("预约中")){ %>		
+															<span>预约人：<%=dingDanList.get(i).getBuyer_id() %></span>	
+															<%} %>
+														</div>			
+														<a href="closeCar.jsp?car_id=<%=carList.get(i).getCar_id()%>" style="width:50px;color:#4573af; float:right;">取消订单</a>	
+														<%if(dingDanList.get(i).getDingdan_state().equals("预约中")){ %>		
+															<a href="refuseAppointment.jsp?car_id=<%=carList.get(i).getCar_id()%>&buyer_id=<%=dingDanList.get(i).getBuyer_id() %>" style="width:50px; margin:auto 10px;color:#4573af; float:right;">拒绝预约</a>
+															<a href="acceptAppointment.jsp?car_id=<%=carList.get(i).getCar_id() %>&buyer_id=<%=dingDanList.get(i).getBuyer_id() %>" style="width:50px; margin:auto 10px;color:#4573af; float:right;">接受预约</a>		
+															<%} %>		
+													</div>		
 											</div>
-											</li>
+									</li>
          	 	 <%	
          	  		}
          	 	 %>

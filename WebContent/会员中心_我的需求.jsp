@@ -31,6 +31,7 @@
 <body>
 <%
 	User user=(User)session.getAttribute("user");
+	UserDAO userdao=new UserDAO();
 	CarDAO cardao=new CarDAO();
 	DingDanDAO dingDanDAO=new DingDanDAO();
 	Requirement_DingDanDAO rdd=new Requirement_DingDanDAO();
@@ -38,7 +39,8 @@
 	Vector<Car> carList=cardao.getCarListByUserId(connection, user.getUserId());
 	Vector<DingDan> dingDanList=dingDanDAO.getUserDingDan(connection, user.getUserId());
 	Vector<Requirement_DingDan> requirement_DingDanList=rdd.getUserReuirementDingDanList(connection, user.getUserId());		
-	DBUtil.closeConnection(connection);
+	Vector<DingDan> buyerDingDanList=dingDanDAO.getBuyerDingDan(connection, user.getUserId());
+	
 %>
 <div id="header">
   <div class="top">
@@ -46,10 +48,10 @@
       <div class="nav left dInline" id="headerMenu">
       <a  href="index.jsp">首页</a>
       <a href="preCarList.jsp">我要买车</a>
-      <a class="on" href="checkUserOnLineSell.jsp">我要卖车</a>
+      <a  href="checkUserOnLineSell.jsp">我要卖车</a>
       <a href="checkUserOnLineSrdz.jsp">私人定制</a>
       <!--<a href="shfw.html">售后服务</a>-->
-      <a id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
+      <a class="on" id="MemberMenuChange" class="b-login" href="checkUserOnLineVIP.jsp" target="_self">我的主页</a>
       <a href="about.jsp">关于我们</a>
       </div>
       <span class="right" id="rightMenuHtml">
@@ -72,8 +74,8 @@
 		<div class="meb-cont clearfix wrap">
 			<div class="meb-nav left dInline">
 				<ul class="clearfix">
-					<li class="on"><a href="会员中心首页.jsp">个人中心</a></li>
-                    <li ><a href="会员中心_我的需求.jsp">我的需求</a></li>
+					<li><a href="会员中心首页.jsp">个人中心</a></li>
+                    <li class="on" ><a href="会员中心_我的需求.jsp">我的需求</a></li>
                     <li><a href="会员中心_我的车.jsp">我的车</a></li>
                     <li><a href="会员中心_账户管理.jsp">账户管理</a></li>				
                 </ul>
@@ -92,9 +94,73 @@
 </div>
 				<div class="mr-detail">
 					<div class="mr-tab clearfix">
+						<a class="on">我的订单</a>
 						<a>私人订制</a>						
 					</div>
 					<div class="me-box">
+					
+					<!-- 我的订单部分 -->
+					<div class="me-dl" style="display:block;">
+							<div class="me-one" id="me-o">
+								<ul class="cs-list">
+									<ul class="cs-list">
+					<%if(buyerDingDanList.size()==0){ %>
+							<div class="me-more">
+								<a href="preCarList.jsp">
+									<h3>您目前没有，买车的需求！</h3>
+									<p>我要买车</p>
+								</a>
+							</div>						
+
+					<%} 
+					else {
+						for(int i=0;i<buyerDingDanList.size();i++){
+							Car buyerCar=cardao.searchCarByID(connection, buyerDingDanList.get(i).getCar_id());
+					%>
+										<li class="clearfix" style="position: relative;">	
+										<span class="carImg left dInline">
+											<a href="javascript:return false;" target="_blank">
+												<div class="car_bg"> </div>		
+												<img src="images/3.png" onerror="this.src='images/pro4.jpg'" width="300" />
+											</a>	
+										</span>	
+											<div class="pa" style="z-index:1111px;left:6px;top:10px;position: absolute;">		
+													</div>	<div class="carTxt right dInline">		
+													<h2><a href="javascript:return false;" target="_blank"><%=buyerCar.getBrand()+" "+buyerCar.getStyle() %></a>
+														
+													</h2>		
+													<p>			
+														<span>购买时间：<%=buyerCar.getBuy_Time() %></span> 			
+														<span>已行驶：<%=buyerCar.getMile() %></span>					
+													</p>		
+													<div class="price clearfix" style="margin:5px 0;">			
+														<div class="left dInline pNum">				
+															<font>寄售价</font><br/>				
+															<span class="num nBlue"><%=buyerCar.getPrice() %>			
+															</span><font> 元</font>			 
+														</div>			
+													</div>		
+													<div class="cs_ding clearfix">			
+														<div class="cdLeft left dInline" style="width:auto;">									
+															<span>卖家电话：<%if(buyerDingDanList.get(i).getDingdan_state().equals("成交")){ %>
+																<span><%=userdao.getUserById(connection,buyerDingDanList.get(i).getUser_id()).getTelephoneNumber() %>
+															<%} %></span>	
+															</span>				
+															<span>订单状态：<%=buyerDingDanList.get(i).getDingdan_state() %></span>			
+														</div>			
+														<a href="closeOrder.jsp?car_id=<%=buyerCar.getCar_id() %>" style="width:50px;color:#4573af; float:right;" onclick="delOrder('delete','88')">取消订单</a>			
+													</div>	
+												</div>
+										</li>
+					<%		}
+						} %>
+					</ul>
+									<div class="hPages">    
+									</div>								
+								</ul>
+							</div>
+						</div>
+					<!-- 私人定制 -->
 						<div class="me-dl" style="display:block;">
 							<div class="me-one" id="me-o">
 								<ul class="cs-list">
@@ -140,20 +206,22 @@
 												</div>	
 												</div>
 												</li>
-										<%}} %>
+										<%}} DBUtil.closeConnection(connection);%>
 										</ul>
 										<div class="hPages">    
 										</div>								
 									</ul>
 							</div>
 						</div>
+						
 						<div class="me-dl">
 							<div class="me-more">
 								<a href="checkUserOnLineSell.jsp">
 									<h3>您目前没有，卖车需求！</h3>
 									<p>点击这里发布爱车</p>
 								</a>
-							</div>						</div>
+							</div>						
+						</div>
 						
                         
 					</div>

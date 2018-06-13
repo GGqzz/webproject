@@ -44,7 +44,7 @@ public class CarDAO {
 	
 	public Vector<Car> getCarList(Connection connection,String brand,String style,float minPrice,float maxPrice,String minAge,String maxAge){
 		Vector<Car> carList=new Vector<Car>();
-		System.out.println(brand+" "+style+" "+minPrice+" "+maxPrice+" "+minPrice+" "+maxPrice+" "+minAge+" "+maxAge);
+		//System.out.println(brand+" "+style+" "+minPrice+" "+maxPrice+" "+minPrice+" "+maxPrice+" "+minAge+" "+maxAge);
 		String sql="select * from car ";
 		int flag=0;
 		if(brand.equals("不限")&&style.equals("不限")&&minPrice==0&&maxPrice==0&&minAge.equals("0")&&maxAge.equals("0")) {
@@ -78,7 +78,7 @@ public class CarDAO {
 				flag=1;
 			}
 		}
-		System.out.println(sql);						
+		//System.out.println(sql);						
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet rSet=preparedStatement.executeQuery();
@@ -225,5 +225,16 @@ public class CarDAO {
 			e.printStackTrace();
 		}
 		return carList;
+	}
+	
+	public void deleteCar(Connection connection,String car_id) {
+		String sql="DELETE FROM car WHERE car_id ="+car_id;
+		try {
+			//System.out.println(require_id);
+			Statement statement=connection.createStatement();
+			statement.executeUpdate(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -5,5 +5,5 @@
 	response.setCharacterEncoding("utf-8");
 	PrintWriter output=response.getWriter();
 	session.removeAttribute("user");
-	output.print("<script>alert('返回主页');window.location.href=\"index.html\";</script>");
+	output.print("<script>alert('返回主页');window.location.href=\"index.jsp\";</script>");
 %>
